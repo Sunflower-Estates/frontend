@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   Bandit,
@@ -57,6 +57,9 @@ export default function Demo(): JSX.Element {
     victory: 3,
   });
 
+  const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
+  const [hasDrawn, setHasDrawn] = useState<boolean>(false);
+
   const [player1Deck, setPlayer1Deck] = useState<CardDataType[]>([
     { card: Copper, count: 7 },
     { card: Estate, count: 3 },
@@ -65,10 +68,7 @@ export default function Demo(): JSX.Element {
     ...new Array(10).fill(null),
   ]);
 
-  const [player1Hand, setPlayer1Hand] = useState<CardDataType[]>([
-    { card: Copper, count: 3 },
-    { card: Estate, count: 2 },
-  ]);
+  const [player1Hand, setPlayer1Hand] = useState<CardDataType[]>([]);
   const [player2Hand, setPlayer2Hand] = useState<CardDataType[]>([
     ...new Array(6).fill(null),
   ]);
@@ -96,19 +96,83 @@ export default function Demo(): JSX.Element {
     { card: Curse, count: 8 },
   ]);
 
-  // FUNCTIONS
-  function shuffle(setState: any) {
-    setState((state: any) => _.shuffle(state));
-  }
+  const player1Draw: Function = useCallback(
+    (draws: number) => {
+      // clone the deck and hand
+      var _player1Deck: CardDataType[] = player1Deck;
+      var _player1Hand: CardDataType[] = player1Hand;
+
+      // loop for each draw
+      for (let x = 0; x < draws; x++) {
+        // draw a single card or return
+        let drawnCard = _.sample(_player1Deck);
+        if (drawnCard) drawnCard.count = 1;
+        else return;
+        console.log("Drew");
+
+        // remove from the deck
+        const cardDataInDeck: CardDataType | undefined = _player1Deck.find(
+          (cardData) => cardData.card == drawnCard?.card
+        );
+
+        // add to the hand
+        const handHasCard: boolean = !!_player1Hand.find(
+          (cardData) => drawnCard?.card == cardData.card
+        );
+
+        if (handHasCard) {
+          // update the card count in the players hand
+          _player1Hand = _player1Hand.map((cardData) => {
+            if (cardData.card == drawnCard?.card) {
+              return {
+                card: cardData.card,
+                count: cardData.count + drawnCard.count,
+              };
+            } else {
+              return cardData;
+            }
+          });
+        } else {
+          // extend the players hand with the drawn card
+          _player1Hand.push(drawnCard);
+        }
+
+        // remove from the deck
+        // _player1Deck = _player1Deck
+        //   .map((cardData) => {
+        //     if (cardData.card == drawnCard?.card) {
+        //       if (cardData.count >= 1) {
+        //         return { ...cardData, count: cardData.count - 1 };
+        //       } else {
+        //         return null;
+        //       }
+        //     } else {
+        //       return cardData;
+        //     }
+        //   })
+        //   .filter((x) => x);
+      }
+
+      //  update state
+      setPlayer1Deck(_player1Deck);
+      setPlayer1Hand(_player1Hand);
+    },
+    [player1Deck, player1Hand]
+  );
 
   // EFFECTS
   useEffect(() => {
-    console.log("Store changed");
-  }, [store]);
+    //  draw card on load
+    if (!hasDrawn) {
+      player1Draw(5);
+      setHasDrawn(true);
+    }
+    return () => {};
+  }, [hasDrawn, player1Draw]);
 
-  useEffect(() => {
-    console.log("Side store changed");
-  }, [sideStore]);
+  useEffect(() => {}, [store]);
+
+  useEffect(() => {}, [sideStore]);
 
   return (
     <>
@@ -162,7 +226,7 @@ export default function Demo(): JSX.Element {
                 {player1.actions} actions - {player1.victory} VP
               </h2>
             </div>
-            {player1Hand.map((data: CardDataType) => {
+            {(player1Hand ?? [])?.map((data: CardDataType) => {
               return (
                 <Player1Card
                   key={"player1Hand-" + data.card.name}
@@ -175,6 +239,9 @@ export default function Demo(): JSX.Element {
           <div></div>
         </div>
       </main>
+      <button className="btn" onClick={() => player1Draw(1)}>
+        Draw
+      </button>
     </>
   );
 }
