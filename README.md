@@ -19,6 +19,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Classes
 
 Cards are stored in `/cards/Cards.jsx`
+
 Card types in `/cards/CardTypes.jsx`
 
 ## Pages
