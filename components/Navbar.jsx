@@ -15,6 +15,14 @@ export default function Navbar() {
         </span>
         <span>Sunflower Estates</span>
       </Link>
+      <div className="div ml-auto">
+        <Link href="/marketplace" className="nav-link">
+          Marketplace
+        </Link>
+        <Link href="/profile" className="nav-link">
+          Profile
+        </Link>
+      </div>
     </nav>
   )
 }

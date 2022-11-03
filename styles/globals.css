@@ -16,7 +16,7 @@ p {
 }
 
 .navbar {
-  @apply flex-grow flex p-5  mb-5;
+  @apply flex-grow flex w-full p-5  mb-5;
 }
 
 .header {
@@ -29,4 +29,8 @@ p {
 
 .card {
   @apply border-2 border-black w-full h-full cursor-pointer select-none;
+}
+
+.nav-link {
+  @apply mx-2.5;
 }
