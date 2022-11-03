@@ -1,5 +1,5 @@
-import {TreasureType} from "../types/CardTypes";
-import {Card, CardType} from "./Cards";
+import {TreasureType} from "../../types/CardTypes";
+import {Card, CardType} from "../Cards";
 
 export const Copper: CardType = new Card(
     "Copper",
