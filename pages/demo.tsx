@@ -1,31 +1,17 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
-import {
-  Bandit,
-  CardType,
-  Copper,
-  Curse,
-  Duchy,
-  Estate,
-  Gardens,
-  Gold,
-  Harbinger,
-  Laboratory,
-  Market,
-  Merchant,
-  Militia,
-  Province,
-  Silver,
-  Vassal,
-  Village,
-  Witch,
-} from "../src/types/Cards";
 import Navbar from "../src/components/Navbar";
 import Player1Card from "../src/components/Player1Card";
 import Player2Card from "../src/components/Player2Card";
 import SideStoreCard from "../src/components/SideStoreCard";
 import StoreCard from "../src/components/StoreCard";
+import {CardType} from "../src/types/Cards";
+import {Copper, Gold, Silver} from "../src/cards/components/TreasureCards";
+import {Duchy, Estate, Gardens, Province} from "../src/cards/components/VictoryCards";
+import {Bandit, Militia, Witch} from "../src/cards/components/AttackCards";
+import {Harbinger, Laboratory, Market, Merchant, Vassal, Village} from "../src/cards/components/ActionCards";
+import {Curse} from "../src/cards/components/CurseCards";
 
 // TYPES
 

@@ -6,7 +6,7 @@ export type CardType = {
   name: string;
   cost: number;
   type: CardTypeType;
-  image: string | null;
+  image: any;
 };
 
 export class Card {
@@ -18,7 +18,7 @@ export class Card {
     name: string,
     cost: number,
     type: CardTypeType,
-    image: string | null
+    image: any
   ) {
     this.name = name;
     this.cost = cost;
