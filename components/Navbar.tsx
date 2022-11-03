@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar(): JSX.Element {
   return (
     <nav className="navbar">
       <Link href="/" className="flex">
@@ -27,5 +27,5 @@ export default function Navbar() {
         </Link>
       </div>
     </nav>
-  )
+  );
 }

@@ -1,11 +1,10 @@
-import Navbar from '../components/Navbar'
-import Player1Card from '../components/Player1Card'
-import Player2Card from '../components/Player2Card'
-import SideStoreCard from '../components/SideStoreCard'
-import StoreCard from '../components/StoreCard'
-
-import { useEffect, useState } from 'react'
-const sideStore = []
+import Navbar from "../components/Navbar";
+import Player1Card from "../components/Player1Card";
+import Player2Card from "../components/Player2Card";
+import SideStoreCard from "../components/SideStoreCard";
+import StoreCard from "../components/StoreCard";
+import _ from "lodash";
+import { useEffect, useState } from "react";
 
 import {
   Gold,
@@ -25,36 +24,56 @@ import {
   Vassal,
   Village,
   Curse,
-} from '../cards/Cards'
+  CardType,
+} from "../cards/Cards";
 
-export default function Demo() {
+// TYPES
+
+export type PlayerType = {
+  name: string;
+  gold: number;
+  actions: number;
+  victory: number;
+};
+
+export type CardDataType = {
+  card: CardType;
+  count: number;
+};
+
+export default function Demo(): JSX.Element {
   //  STATE
-  const [player1, setPlayer1] = useState({
-    name: 'truemiller',
+  const [player1, setPlayer1] = useState<PlayerType>({
+    name: "truemiller",
     gold: 3,
     actions: 3,
     victory: 3,
-  })
-  const [player2, setPlayer2] = useState({
-    name: 'supersynapse',
-    gold: 3,
-    actions: 3,
-    victory: 3,
-  })
+  });
 
-  const [player1Deck, setPlayer1Deck] = useState([
+  const [player2, setPlayer2] = useState<PlayerType>({
+    name: "supersynapse",
+    gold: 3,
+    actions: 3,
+    victory: 3,
+  });
+
+  const [player1Deck, setPlayer1Deck] = useState<CardDataType[]>([
     { card: Copper, count: 7 },
     { card: Estate, count: 3 },
-  ])
-  const [player2Deck, setPlayer2Deck] = useState([...new Array(10).fill(0)])
+  ]);
+  const [player2Deck, setPlayer2Deck] = useState<CardDataType[]>([
+    ...new Array(10).fill(null),
+  ]);
 
-  const [player1Hand, setPlayer1Hand] = useState([
+  const [player1Hand, setPlayer1Hand] = useState<CardDataType[]>([
     { card: Copper, count: 3 },
     { card: Estate, count: 2 },
-  ])
-  const [player2Hand, setPlayer2Hand] = useState([...new Array(6).fill(0)])
+  ]);
+  const [player2Hand, setPlayer2Hand] = useState<CardDataType[]>([
+    ...new Array(6).fill(null),
+  ]);
 
-  const [store, setStore] = useState([
+  const [store, setStore] = useState<CardDataType[]>([
     { card: Militia, count: 10 },
     { card: Bandit, count: 10 },
     { card: Laboratory, count: 10 },
@@ -65,9 +84,9 @@ export default function Demo() {
     { card: Vassal, count: 10 },
     { card: Village, count: 10 },
     { card: Gardens, count: 10 },
-  ])
+  ]);
 
-  const [sideStore, setSideStore] = useState([
+  const [sideStore, setSideStore] = useState<CardDataType[]>([
     { card: Province, count: 8 },
     { card: Gold, count: 30 },
     { card: Duchy, count: 8 },
@@ -75,21 +94,21 @@ export default function Demo() {
     { card: Estate, count: 8 },
     { card: Copper, count: 50 },
     { card: Curse, count: 8 },
-  ])
+  ]);
 
   // FUNCTIONS
-  function shuffle(setState) {
-    setState((state) => __.shuffle(state))
+  function shuffle(setState: any) {
+    setState((state: any) => _.shuffle(state));
   }
 
   // EFFECTS
   useEffect(() => {
-    console.log('Store changed')
-  }, [store])
+    console.log("Store changed");
+  }, [store]);
 
   useEffect(() => {
-    console.log('Side store changed')
-  }, [sideStore])
+    console.log("Side store changed");
+  }, [sideStore]);
 
   return (
     <>
@@ -100,21 +119,21 @@ export default function Demo() {
           <div className="col-span-6 grid grid-cols-6">
             <div className="col-span-full">
               <h2>
-                Player 2: {player2.name} - {player2.gold} gold -{' '}
+                Player 2: {player2.name} - {player2.gold} gold -{" "}
                 {player2.actions} actions - {player2.victory} VP
               </h2>
             </div>
-            {player2Hand.map((data, index) => {
-              return <Player2Card key={'player2Hand-' + index} />
+            {player2Hand.map((data: CardDataType, index: number) => {
+              return <Player2Card key={"player2Hand-" + index} />;
             })}
           </div>
           <div></div>
         </div>
         <div className="grid grid-cols-12 bg-red-50 gap-5 mb-5">
           <div className="grid grid-cols-2 bg-red-100">
-            {sideStore.map((data) => (
+            {sideStore.map((data: CardDataType) => (
               <SideStoreCard
-                key={'sideStore-' + data.card.name}
+                key={"sideStore-" + data.card.name}
                 data={data}
                 setSideStore={setSideStore}
               />
@@ -122,14 +141,14 @@ export default function Demo() {
           </div>
           <div className="col-span-3">
             <div className="grid grid-cols-5 bg-red-100 ">
-              {store.map((data) => {
+              {store.map((data: CardDataType) => {
                 return (
                   <StoreCard
-                    key={'store-' + data.card.name}
+                    key={"store-" + data.card.name}
                     data={data}
                     setStore={setStore}
                   />
-                )
+                );
               })}
             </div>
           </div>
@@ -139,23 +158,23 @@ export default function Demo() {
           <div className="col-span-6 grid grid-cols-6">
             <div className="col-span-full">
               <h2>
-                Player 1: {player1.name} - {player1.gold} gold -{' '}
+                Player 1: {player1.name} - {player1.gold} gold -{" "}
                 {player1.actions} actions - {player1.victory} VP
               </h2>
             </div>
-            {player1Hand.map((data) => {
+            {player1Hand.map((data: CardDataType) => {
               return (
                 <Player1Card
-                  key={'player1Hand-' + data.card.name}
+                  key={"player1Hand-" + data.card.name}
                   data={data}
                   setPlayer1Hand={setPlayer1Hand}
                 />
-              )
+              );
             })}
           </div>
           <div></div>
         </div>
       </main>
     </>
-  )
+  );
 }
