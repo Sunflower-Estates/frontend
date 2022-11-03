@@ -9,6 +9,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Technologies used
 
 - [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 
