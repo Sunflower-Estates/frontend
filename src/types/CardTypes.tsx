@@ -7,6 +7,9 @@ class CardType {
   constructor(name: string) {
     this.name = name;
   }
+  getCardType(){
+    return this.name
+  }
 }
 
 export const TreasureType: CardType = new CardType("Treasure");
