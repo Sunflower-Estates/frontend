@@ -28,6 +28,7 @@ import {
 } from '../cards/Cards'
 
 export default function Demo() {
+  //  STATE
   const [player1, setPlayer1] = useState({
     name: 'truemiller',
     gold: 3,
@@ -76,6 +77,12 @@ export default function Demo() {
     { card: Curse, count: 8 },
   ])
 
+  // FUNCTIONS
+  function shuffle(setState) {
+    setState((state) => __.shuffle(state))
+  }
+
+  // EFFECTS
   useEffect(() => {
     console.log('Store changed')
   }, [store])
