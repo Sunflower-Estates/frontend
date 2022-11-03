@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar'
+import Navbar from '../src/components/Navbar'
 
 export default function Profile() {
   return (
@@ -6,7 +6,7 @@ export default function Profile() {
       <Navbar />
       <div className="container mx-auto">
         <h1>Profile</h1>
-        <p>The user's profile will be visible here.</p>
+        <p>The user profile will be visible here.</p>
       </div>
     </>
   )
