@@ -1,4 +1,6 @@
 import Card from "./Card";
+import { MouseEventHandler, MouseEvent } from "react";
+import { CardDataType } from "../pages/demo";
 type StoreCardPropsType = {
   data: any;
   setStore: any;
@@ -7,8 +9,8 @@ export default function StoreCard({
   data,
   setStore,
 }: StoreCardPropsType): JSX.Element {
-  const handleClick = (e: Event) => {
-    setStore((prevStore: any[]) => {
+  const handleClick: MouseEventHandler = (e: MouseEvent<HTMLElement>) => {
+    setStore((prevStore: CardDataType[]) => {
       return prevStore
         .map((element) => {
           if (element == data) {

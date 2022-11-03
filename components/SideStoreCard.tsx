@@ -1,3 +1,5 @@
+import { MouseEventHandler, MouseEvent } from "react";
+import { CardDataType } from "../pages/demo";
 import Card from "./Card";
 export type SideStoreCardPropsType = {
   data: any;
@@ -7,8 +9,8 @@ export default function SideStoreCard({
   data,
   setSideStore,
 }: SideStoreCardPropsType): JSX.Element {
-  const handleClick = (e: Event) => {
-    setSideStore((prevSideStore: any[]) => {
+  const handleClick: MouseEventHandler = (e: MouseEvent<HTMLElement>) => {
+    setSideStore((prevSideStore: CardDataType[]) => {
       return prevSideStore
         .map((element) => {
           if (element == data) {

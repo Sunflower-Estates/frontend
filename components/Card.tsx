@@ -1,6 +1,9 @@
+import { MouseEventHandler } from "react";
+import { CardDataType } from "../pages/demo";
+
 type CardProps = {
-  data: any;
-  handleClick: any;
+  data: CardDataType;
+  handleClick: MouseEventHandler;
 };
 export default function Card({ data, handleClick }: CardProps): JSX.Element {
   return (
