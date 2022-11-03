@@ -15,16 +15,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Classes
 
-Cards are stored in `/cards/Cards.jsx`
+Cards are stored in `/cards/Cards.tsx`
 
-Card types in `/cards/CardTypes.jsx`
+Card types in `/cards/CardTypes.tsx`
 
 ## Pages
 
 All pages are under `/pages/`.
 Currently there are:
 
-- `index.jsx`, the homepage
-- `demo.jsx`, the demo single player game
-- `marketplace.jsx`, a placeholder for marketplace
-- `profile.jsx`, a placehold for a users profile
+- `index.tsx`, the homepage
+- `demo.tsx`, the demo single player game
+- `marketplace.tsx`, a placeholder for marketplace
+- `profile.tsx`, a placehold for a users profile
