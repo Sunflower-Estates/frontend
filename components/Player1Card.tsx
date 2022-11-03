@@ -1,6 +1,7 @@
-import Card from "./Card";
-import { MouseEventHandler, MouseEvent } from "react";
+import { MouseEvent, MouseEventHandler } from "react";
+
 import { CardDataType } from "../pages/demo";
+import Card from "./Card";
 
 export type Player1CardPropsType = {
   data: any;

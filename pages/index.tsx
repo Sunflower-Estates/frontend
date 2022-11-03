@@ -1,7 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import Navbar from '../components/Navbar'
+import Image from "next/image";
+import Link from "next/link";
+
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
           <Image
             width={500}
             height={750}
-            src={'https://sunflower-land.com/assets/landing.4e1310ef.png'}
+            src={"https://sunflower-land.com/assets/landing.4e1310ef.png"}
             objectFit="responsive"
             layout="cover"
             alt="Sunflower Land"
@@ -37,5 +37,5 @@ export default function Home() {
         </div>
       </header>
     </>
-  )
+  );
 }

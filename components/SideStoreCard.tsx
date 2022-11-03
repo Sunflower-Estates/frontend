@@ -1,4 +1,5 @@
-import { MouseEventHandler, MouseEvent } from "react";
+import { MouseEvent, MouseEventHandler } from "react";
+
 import { CardDataType } from "../pages/demo";
 import Card from "./Card";
 export type SideStoreCardPropsType = {

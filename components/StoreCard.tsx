@@ -1,6 +1,7 @@
-import Card from "./Card";
-import { MouseEventHandler, MouseEvent } from "react";
+import { MouseEvent, MouseEventHandler } from "react";
+
 import { CardDataType } from "../pages/demo";
+import Card from "./Card";
 type StoreCardPropsType = {
   data: any;
   setStore: any;
