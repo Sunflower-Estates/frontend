@@ -1,10 +1,5 @@
 import {
-  ActionType,
-  AttackType,
   CardTypeType,
-  CurseType,
-  TreasureType,
-  VictoryType,
 } from "../types/CardTypes";
 
 export type CardType = {
