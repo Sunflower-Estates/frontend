@@ -17,7 +17,7 @@ export default function Card({ data, handleClick }) {
       <div className="h-full flex flex-col">
         <div
           className="bg-red-500 rounded-full text-center mt-auto"
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '25px', height: '25px' }}
         >
           {data.count}
         </div>
