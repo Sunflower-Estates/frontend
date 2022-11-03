@@ -20,7 +20,7 @@ import {
   Vassal,
   Village,
   Witch,
-} from "../src/cards/Cards";
+} from "../src/types/Cards";
 import Navbar from "../src/components/Navbar";
 import Player1Card from "../src/components/Player1Card";
 import Player2Card from "../src/components/Player2Card";

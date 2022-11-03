@@ -1,5 +1,5 @@
+import {Card, CardType} from "../../types/Cards";
 import {ActionType} from "../../types/CardTypes";
-import {Card, CardType} from "../Cards";
 
 export const Laboratory: CardType = new Card("Laboratory", 5, ActionType, null);
 export const Market: CardType = new Card("Market", 5, ActionType, null);

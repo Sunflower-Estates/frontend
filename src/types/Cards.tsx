@@ -1,6 +1,6 @@
 import {
   CardTypeType,
-} from "../types/CardTypes";
+} from "./CardTypes";
 
 export type CardType = {
   name: string;
