@@ -1,4 +1,9 @@
 import Navbar from '../components/Navbar'
+import Player1Card from '../components/Player1Card'
+import Player2Card from '../components/Player2Card'
+import SideStoreCard from '../components/SideStoreCard'
+import StoreCard from '../components/StoreCard'
+
 import { useEffect, useState } from 'react'
 const sideStore = []
 
@@ -145,98 +150,5 @@ export default function Demo() {
         </div>
       </main>
     </>
-  )
-}
-
-function StoreCard({ data, setStore }) {
-  const handleClick = (e) => {
-    setStore((prevStore) => {
-      return prevStore
-        .map((element) => {
-          if (element == data) {
-            const newCount = Math.max(element.count - 1, 0)
-            if (newCount <= 0) return null
-            return { card: data.card, count: newCount }
-          } else {
-            return element
-          }
-        })
-        .filter((x) => x)
-    })
-  }
-  return <Card data={data} handleClick={handleClick} />
-}
-
-function SideStoreCard({ data, setSideStore }) {
-  const handleClick = (e) => {
-    setSideStore((prevSideStore) => {
-      return prevSideStore
-        .map((element) => {
-          if (element == data) {
-            const newCount = Math.max(element.count - 1, 0)
-            return { card: data.card, count: newCount }
-          } else {
-            return element
-          }
-        })
-        .filter((x) => x)
-    })
-  }
-  return <Card data={data} handleClick={handleClick} />
-}
-
-function Player1Card({ data, setPlayer1Hand }) {
-  const handleClick = (e) => {
-    setPlayer1Hand((prevState) => {
-      return prevState
-        .map((element) => {
-          if (element == data) {
-            const newCount = Math.max(element.count - 1, 0)
-            if (newCount <= 0) return null
-            return { card: data.card, count: newCount }
-          } else {
-            return element
-          }
-        })
-        .filter((x) => x)
-    })
-  }
-  return <Card data={data} handleClick={handleClick} />
-}
-
-function Player2Card() {
-  return (
-    <div style={{ aspectRatio: 1 / 1 }} className="bg-red-200 card">
-      X
-    </div>
-  )
-}
-
-function Card({ data, handleClick }) {
-  return (
-    <div
-      onClick={handleClick}
-      style={{ aspectRatio: 1 / 1 }}
-      className="bg-red-200 card grid grid-cols-2"
-    >
-      <div>{data.card.name}</div>
-      <div>
-        <div
-          className="ml-auto bg-yellow-500 rounded-full text-center"
-          style={{ width: '25px', height: '25px' }}
-        >
-          {data.card.cost}
-        </div>
-      </div>
-      <div className="h-full flex flex-col">
-        <div
-          className="bg-red-500 rounded-full text-center mt-auto"
-          style={{ width: '25px', height: '25px' }}
-        >
-          {data.count}
-        </div>
-      </div>
-      <div></div>
-    </div>
   )
 }
