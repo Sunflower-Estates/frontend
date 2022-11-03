@@ -3,8 +3,8 @@ import { MouseEvent, MouseEventHandler } from "react";
 import { CardDataType } from "../pages/demo";
 import Card from "./Card";
 type StoreCardPropsType = {
-  data: any;
-  setStore: any;
+  data: CardDataType;
+  setStore: Function;
 };
 export default function StoreCard({
   data,

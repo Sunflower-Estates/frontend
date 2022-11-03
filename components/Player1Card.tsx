@@ -4,7 +4,7 @@ import { CardDataType } from "../pages/demo";
 import Card from "./Card";
 
 export type Player1CardPropsType = {
-  data: any;
+  data: CardDataType;
   setPlayer1Hand: Function;
 };
 export default function Player1Card({

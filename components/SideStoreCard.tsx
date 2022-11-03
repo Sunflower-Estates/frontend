@@ -3,8 +3,8 @@ import { MouseEvent, MouseEventHandler } from "react";
 import { CardDataType } from "../pages/demo";
 import Card from "./Card";
 export type SideStoreCardPropsType = {
-  data: any;
-  setSideStore: any;
+  data: CardDataType;
+  setSideStore: Function;
 };
 export default function SideStoreCard({
   data,
