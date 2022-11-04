@@ -42,6 +42,55 @@ export type CardDataType = {
   count: number;
 };
 
+// FUNCTIONS
+export const addCardToData = (
+  card: CardType,
+  array: CardDataType[]
+): CardDataType[] => {
+  if (array.find((cardData) => cardData.card == card)) {
+    return array.map((cardData) => {
+      if (cardData.card == card) {
+        return { card: card, count: cardData.count + 1 };
+      } else {
+        return cardData;
+      }
+    });
+  } else {
+    return [...array, { card: card, count: 1 }];
+  }
+};
+
+export const removeCardFromData = (
+  card: CardType,
+  array: CardDataType[]
+): CardDataType[] => {
+  const arrayCardData = array.find((cardData) => cardData.card == card);
+  const hasCard = !!arrayCardData;
+  if (hasCard) {
+    const newArrayCardData = {
+      ...arrayCardData,
+      count: arrayCardData.count - 1,
+    };
+    if (newArrayCardData.count <= 0) {
+      return array.filter((cardData) => cardData.card != newArrayCardData.card);
+    } else {
+      return array.map((cardData) => {
+        if (cardData.card == newArrayCardData.card) {
+          return newArrayCardData;
+        } else {
+          return cardData;
+        }
+      });
+    }
+  } else {
+    return array;
+  }
+};
+
+export const getCardDataLength = (array: CardDataType[]): number => {
+  return array.reduce((a: number, b: CardDataType) => a + b.count, 0);
+};
+
 export default function Demo(): JSX.Element {
   //  STATE
   const [player1, setPlayer1] = useState<PlayerType>({
@@ -88,56 +137,6 @@ export default function Demo(): JSX.Element {
   ]);
 
   const [sideStore, setSideStore] = useState<CardDataType[]>([]);
-
-  const addCardToData = (
-    card: CardType,
-    array: CardDataType[]
-  ): CardDataType[] => {
-    if (array.find((cardData) => cardData.card == card)) {
-      return array.map((cardData) => {
-        if (cardData.card == card) {
-          return { card: card, count: cardData.count + 1 };
-        } else {
-          return cardData;
-        }
-      });
-    } else {
-      return [...array, { card: card, count: 1 }];
-    }
-  };
-
-  const removeCardFromData = (
-    card: CardType,
-    array: CardDataType[]
-  ): CardDataType[] => {
-    const arrayCardData = array.find((cardData) => cardData.card == card);
-    const hasCard = !!arrayCardData;
-    if (hasCard) {
-      const newArrayCardData = {
-        ...arrayCardData,
-        count: arrayCardData.count - 1,
-      };
-      if (newArrayCardData.count <= 0) {
-        return array.filter(
-          (cardData) => cardData.card != newArrayCardData.card
-        );
-      } else {
-        return array.map((cardData) => {
-          if (cardData.card == newArrayCardData.card) {
-            return newArrayCardData;
-          } else {
-            return cardData;
-          }
-        });
-      }
-    } else {
-      return array;
-    }
-  };
-
-  const getCardDataLength = (array: CardDataType[]): number => {
-    return array.reduce((a: number, b: CardDataType) => a + b.count, 0);
-  };
 
   const player1Draw: Function = useCallback(
     (draws: number) => {
