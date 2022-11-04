@@ -100,6 +100,7 @@ export const removeCardFromData = (
 };
 
 export const getCardDataCount = (array: CardDataType[]): number => {
+  // sum the counts from all card data
   return array.reduce((a: number, b: CardDataType) => a + b.count, 0);
 };
 
