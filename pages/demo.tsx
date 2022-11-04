@@ -135,6 +135,10 @@ export default function Demo(): JSX.Element {
     }
   };
 
+  const getCardDataLength = (array: CardDataType[]): number => {
+    return array.reduce((a: number, b: CardDataType) => a + b.count, 0);
+  };
+
   const player1Draw: Function = useCallback(
     (draws: number) => {
       // clone the deck and hand
@@ -180,16 +184,7 @@ export default function Demo(): JSX.Element {
       player1Draw(5);
       setHasDrawn(true);
     }
-    return () => {};
   }, [hasDrawn, player1Draw]);
-
-  useEffect(() => {
-    console.log(player1Deck);
-  }, [player1Deck]);
-
-  useEffect(() => {}, [store]);
-
-  useEffect(() => {}, [sideStore]);
 
   return (
     <>
@@ -237,7 +232,7 @@ export default function Demo(): JSX.Element {
         <div className="grid grid-cols-12">
           <div>
             <h2>Deck</h2>
-            <pre>{JSON.stringify(player1Deck)}</pre>
+            <pre>{getCardDataLength(player1Deck)}</pre>
           </div>
           <div className="col-span-6 grid grid-cols-6">
             <div className="col-span-full">
