@@ -9,8 +9,7 @@ class CardType {
   }
 }
 
-export const TreasureType: CardType = new CardType("Treasure");
+export const CropType: CardType = new CardType("Crop");
 export const ActionType: CardType = new CardType("Action");
-export const VictoryType: CardType = new CardType("Victory");
-export const CurseType: CardType = new CardType("Curse");
-export const AttackType: CardType = new CardType("Attack");
+export const WarbondType: CardType = new CardType("Warbond");
+export const ResourceType: CardType = new CardType("Resource");

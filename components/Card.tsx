@@ -10,7 +10,7 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
   return (
     <div
       onClick={handleClick}
-      style={{ aspectRatio: 1 / 1 }}
+      style={{ aspectRatio: 3 / 4 }}
       className="bg-red-200 hover:bg-red-300 card grid grid-cols-2"
     >
       <div>{data.card.name}</div>

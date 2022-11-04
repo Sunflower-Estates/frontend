@@ -1,32 +1,52 @@
 import _ from "lodash";
-import { stringify } from "querystring";
-import { useCallback, useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 
 import {
-  Bandit,
+  Beetroot,
+  Cabbage,
   CardType,
-  Copper,
-  Curse,
-  Duchy,
-  Estate,
-  Gardens,
-  Gold,
-  Harbinger,
-  Laboratory,
-  Market,
-  Merchant,
-  Militia,
-  Province,
-  Silver,
-  Vassal,
-  Village,
-  Witch,
+  Carrot,
+  Cauliflower,
+  Fertilizer,
+  Firelighter,
+  GoblinBalloon,
+  GoblinBlacksmith,
+  GoblinCarry,
+  GoblinFarmer,
+  GoblinWarrior,
+  HumanBlacksmith,
+  HumanFarmer,
+  HumanWarrior,
+  IronShovel,
+  Mine,
+  Parsnip,
+  Patron,
+  Potato,
+  Pumpkin,
+  Radish,
+  RadishPie,
+  Resources,
+  RustyShovel,
+  Shop,
+  Sunflower,
+  Tailor,
+  Ticket,
+  TravelingSalesman,
+  Treasury,
+  Tribute,
+  Wheat,
+  WishingWell,
 } from "../cards/Cards";
+import ActionStoreCard from "../components/ActionStoreCard";
+import Card from "../components/Card";
+import { CropStore } from "../components/CropStore";
+import { MainStore } from "../components/MainStore";
 import Navbar from "../components/Navbar";
+import { Player1Area } from "../components/Player1Area";
 import Player1Card from "../components/Player1Card";
 import Player2Card from "../components/Player2Card";
+import { Player2Hand } from "../components/Player2Hand";
 import SideStoreCard from "../components/SideStoreCard";
-import StoreCard from "../components/StoreCard";
 
 // TYPES
 
@@ -101,7 +121,7 @@ export const removeCardFromData = (
 
 export const getCardDataCount = (array: CardDataType[]): number => {
   // sum the counts from all card data
-  return array.reduce((a: number, b: CardDataType) => a + b.count, 0);
+  return (array ?? []).reduce((a: number, b: CardDataType) => a + b.count, 0);
 };
 
 export default function Demo(): JSX.Element {
@@ -121,11 +141,13 @@ export default function Demo(): JSX.Element {
   });
 
   const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
-  const [hasDrawn, setHasDrawn] = useState<boolean>(false);
+  const [hasDrawn, setHasDrawn] = useState<boolean>();
+
+  const [playArea, setPlayArea] = useState<CardDataType[]>([]);
 
   const [player1Deck, setPlayer1Deck] = useState<CardDataType[]>([
-    { card: Copper, count: 7 },
-    { card: Estate, count: 3 },
+    { card: Sunflower, count: 7 },
+    { card: Ticket, count: 3 },
   ]);
   const [player2Deck, setPlayer2Deck] = useState<CardDataType[]>([
     ...new Array(10).fill(null),
@@ -136,26 +158,54 @@ export default function Demo(): JSX.Element {
     ...new Array(6).fill(null),
   ]);
 
-  const [store, setStore] = useState<CardDataType[]>([
-    { card: Militia, count: 10 },
-    { card: Bandit, count: 10 },
-    { card: Laboratory, count: 10 },
-    { card: Market, count: 10 },
-    { card: Witch, count: 10 },
-    { card: Harbinger, count: 10 },
-    { card: Merchant, count: 10 },
-    { card: Vassal, count: 10 },
-    { card: Village, count: 10 },
-    { card: Gardens, count: 10 },
+  const [cropStore, setCropStore] = useState<CardDataType[]>([
+    { card: Sunflower, count: Infinity },
+    { card: Potato, count: Infinity },
+    { card: Pumpkin, count: Infinity },
+    { card: Carrot, count: Infinity },
+    { card: Cabbage, count: Infinity },
+    { card: Beetroot, count: Infinity },
+    { card: Cauliflower, count: Infinity },
+    { card: Parsnip, count: Infinity },
+    { card: Wheat, count: Infinity },
+    { card: Radish, count: Infinity },
   ]);
 
-  const [sideStore, setSideStore] = useState<CardDataType[]>([]);
+  const [actionStore, setActionStore] = useState<CardDataType[]>([
+    { card: Fertilizer, count: 10 },
+    { card: Firelighter, count: 10 },
+    { card: GoblinBalloon, count: 10 },
+    { card: HumanBlacksmith, count: 10 },
+    { card: GoblinBlacksmith, count: 10 },
+    { card: GoblinCarry, count: 10 },
+    { card: GoblinFarmer, count: 10 },
+    { card: HumanFarmer, count: 10 },
+    { card: Mine, count: 10 },
+    { card: Resources, count: 10 },
+    { card: RustyShovel, count: 10 },
+    { card: IronShovel, count: 10 },
+    { card: Shop, count: 10 },
+    { card: WishingWell, count: 10 },
+    { card: TravelingSalesman, count: 10 },
+    { card: Tailor, count: 10 },
+    { card: HumanWarrior, count: 10 },
+    { card: GoblinWarrior, count: 10 },
+    { card: RadishPie, count: 10 },
+  ]);
+
+  const [warbondStore, setWarbondStore] = useState<CardDataType[]>([
+    { card: Ticket, count: 8 },
+    { card: Tribute, count: 8 },
+    { card: Patron, count: 8 },
+    { card: Treasury, count: 8 },
+  ]);
 
   const player1Draw: Function = useCallback(
     (draws: number) => {
+      if (!player1Deck || !player1Hand) return;
       // clone the deck and hand
-      var _player1Deck: CardDataType[] = player1Deck;
-      var _player1Hand: CardDataType[] = player1Hand;
+      var _player1Deck: CardDataType[] = player1Deck!;
+      var _player1Hand: CardDataType[] = player1Hand!;
 
       // loop for each draw
       for (let x = 0; x < draws; x++) {
@@ -173,22 +223,6 @@ export default function Demo(): JSX.Element {
     [player1Deck, player1Hand]
   );
 
-  useEffect(() => {
-    setSideStore([
-      { card: Province, count: 8 },
-      { card: Gold, count: 30 },
-      { card: Duchy, count: 8 },
-      { card: Silver, count: 40 },
-      { card: Estate, count: 8 },
-      { card: Copper, count: 50 },
-      { card: Curse, count: 8 },
-    ]);
-    setPlayer1Deck([
-      { card: Copper, count: 7 },
-      { card: Estate, count: 3 },
-    ]);
-  }, []);
-
   // EFFECTS
   useEffect(() => {
     //  draw card on load
@@ -202,73 +236,54 @@ export default function Demo(): JSX.Element {
     <>
       <Navbar />
       <main className="flex-grow bg-red-50">
-        <div className="grid grid-cols-12 mb-5">
-          <div></div>
-          <div className="col-span-6 grid grid-cols-6">
-            <div className="col-span-full">
-              <h2>
-                Player 2: {player2.name} - {player2.gold} gold -{" "}
-                {player2.actions} actions - {player2.victory} VP
-              </h2>
-            </div>
-            {player2Hand.map((data: CardDataType, index: number) => {
-              return <Player2Card key={"player2Hand-" + index} />;
-            })}
-          </div>
-          <div></div>
-        </div>
-        <div className="grid grid-cols-12 bg-red-50 gap-5 mb-5">
-          <div className="grid grid-cols-2 bg-red-100">
-            {sideStore.map((data: CardDataType) => (
-              <SideStoreCard
-                key={"sideStore-" + data.card.name}
-                data={data}
-                setSideStore={setSideStore}
-              />
-            ))}
-          </div>
-          <div className="col-span-3">
-            <div className="grid grid-cols-5 bg-red-100 ">
-              {store.map((data: CardDataType) => {
-                return (
-                  <StoreCard
-                    key={"store-" + data.card.name}
-                    data={data}
-                    setStore={setStore}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-12">
-          <div>
-            <h2>Deck</h2>
-            <pre>{getCardDataCount(player1Deck)}</pre>
-          </div>
-          <div className="col-span-6 grid grid-cols-6">
-            <div className="col-span-full">
-              <h2>
-                Player 1: {player1.name} - {player1.gold} gold -{" "}
-                {player1.actions} actions - {player1.victory} VP
-              </h2>
-            </div>
-            {(player1Hand ?? [])?.map((data: CardDataType) => {
-              return (
-                <Player1Card
-                  key={"player1Hand-" + data.card.name}
-                  data={data}
-                  setPlayer1Hand={setPlayer1Hand}
-                />
-              );
-            })}
-          </div>
-          <div></div>
+        <div className="container mx-auto">
+          {/* <Player2Hand player2={player2} player2Hand={player2Hand} /> */}
+          <CropStore cropStore={cropStore} setCropStore={setCropStore} />
+          <MainStore
+            warbondStore={warbondStore}
+            setWarbondStore={setWarbondStore}
+            actionStore={actionStore}
+            setActionStore={setActionStore}
+          />
+          <PlayArea playArea={playArea} />
+          <Player1Area
+            player1={player1}
+            player1Hand={player1Hand}
+            setPlayer1Hand={setPlayer1Hand}
+            player1Deck={player1Deck}
+            setPlayArea={setPlayArea}
+          />
         </div>
       </main>
       <button className="btn" onClick={() => player1Draw(1)}>
         Draw
       </button>
     </>
+  );
+}
+
+type PlayAreaPropsType = {
+  playArea: CardDataType[];
+};
+function PlayArea({ playArea }: PlayAreaPropsType) {
+  return (
+    <div className="col-span-12 grid grid-cols-6">
+      <div className="col-span-1"></div>
+      <div className="col-span-4 bg-white border-2 shadow-inset-xl">
+        <h2 className="col-span-full">Play Area</h2>
+        <div className="grid grid-cols-5 gap-2.5 p-5">
+          {(playArea ?? []).map((cardData) => {
+            return (
+              <Card
+                key={`playArea-${cardData.card.name}`}
+                data={cardData}
+                handleClick={() => {}}
+              />
+            );
+          })}
+        </div>
+        <div className="col-span-1"></div>
+      </div>
+    </div>
   );
 }
