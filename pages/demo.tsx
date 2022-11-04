@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { stringify } from "querystring";
 import { useCallback, useEffect, useState } from "react";
 
 import {
@@ -86,15 +87,53 @@ export default function Demo(): JSX.Element {
     { card: Gardens, count: 10 },
   ]);
 
-  const [sideStore, setSideStore] = useState<CardDataType[]>([
-    { card: Province, count: 8 },
-    { card: Gold, count: 30 },
-    { card: Duchy, count: 8 },
-    { card: Silver, count: 40 },
-    { card: Estate, count: 8 },
-    { card: Copper, count: 50 },
-    { card: Curse, count: 8 },
-  ]);
+  const [sideStore, setSideStore] = useState<CardDataType[]>([]);
+
+  const addCardToData = (
+    card: CardType,
+    array: CardDataType[]
+  ): CardDataType[] => {
+    if (array.find((cardData) => cardData.card == card)) {
+      return array.map((cardData) => {
+        if (cardData.card == card) {
+          return { card: card, count: cardData.count + 1 };
+        } else {
+          return cardData;
+        }
+      });
+    } else {
+      return [...array, { card: card, count: 1 }];
+    }
+  };
+
+  const removeCardFromData = (
+    card: CardType,
+    array: CardDataType[]
+  ): CardDataType[] => {
+    const arrayCardData = array.find((cardData) => cardData.card == card);
+    const hasCard = !!arrayCardData;
+    if (hasCard) {
+      const newArrayCardData = {
+        ...arrayCardData,
+        count: arrayCardData.count - 1,
+      };
+      if (newArrayCardData.count <= 0) {
+        return array.filter(
+          (cardData) => cardData.card != newArrayCardData.card
+        );
+      } else {
+        return array.map((cardData) => {
+          if (cardData.card == newArrayCardData.card) {
+            return newArrayCardData;
+          } else {
+            return cardData;
+          }
+        });
+      }
+    } else {
+      return array;
+    }
+  };
 
   const player1Draw: Function = useCallback(
     (draws: number) => {
@@ -105,60 +144,34 @@ export default function Demo(): JSX.Element {
       // loop for each draw
       for (let x = 0; x < draws; x++) {
         // draw a single card or return
-        let drawnCard = _.sample(_player1Deck);
-        if (drawnCard) drawnCard.count = 1;
-        else return;
-        console.log("Drew");
-
-        // remove from the deck
-        const cardDataInDeck: CardDataType | undefined = _player1Deck.find(
-          (cardData) => cardData.card == drawnCard?.card
-        );
-
-        // add to the hand
-        const handHasCard: boolean = !!_player1Hand.find(
-          (cardData) => drawnCard?.card == cardData.card
-        );
-
-        if (handHasCard) {
-          // update the card count in the players hand
-          _player1Hand = _player1Hand.map((cardData) => {
-            if (cardData.card == drawnCard?.card) {
-              return {
-                card: cardData.card,
-                count: cardData.count + drawnCard.count,
-              };
-            } else {
-              return cardData;
-            }
-          });
-        } else {
-          // extend the players hand with the drawn card
-          _player1Hand.push(drawnCard);
-        }
-
-        // remove from the deck
-        // _player1Deck = _player1Deck
-        //   .map((cardData) => {
-        //     if (cardData.card == drawnCard?.card) {
-        //       if (cardData.count >= 1) {
-        //         return { ...cardData, count: cardData.count - 1 };
-        //       } else {
-        //         return null;
-        //       }
-        //     } else {
-        //       return cardData;
-        //     }
-        //   })
-        //   .filter((x) => x);
+        let drawnCard: CardDataType = _.sample(_player1Deck)!;
+        if (!drawnCard) return;
+        _player1Hand = addCardToData(drawnCard.card, _player1Hand);
+        _player1Deck = removeCardFromData(drawnCard.card, _player1Deck);
       }
 
       //  update state
-      setPlayer1Deck(_player1Deck);
       setPlayer1Hand(_player1Hand);
+      setPlayer1Deck(_player1Deck);
     },
     [player1Deck, player1Hand]
   );
+
+  useEffect(() => {
+    setSideStore([
+      { card: Province, count: 8 },
+      { card: Gold, count: 30 },
+      { card: Duchy, count: 8 },
+      { card: Silver, count: 40 },
+      { card: Estate, count: 8 },
+      { card: Copper, count: 50 },
+      { card: Curse, count: 8 },
+    ]);
+    setPlayer1Deck([
+      { card: Copper, count: 7 },
+      { card: Estate, count: 3 },
+    ]);
+  }, []);
 
   // EFFECTS
   useEffect(() => {
@@ -169,6 +182,10 @@ export default function Demo(): JSX.Element {
     }
     return () => {};
   }, [hasDrawn, player1Draw]);
+
+  useEffect(() => {
+    console.log(player1Deck);
+  }, [player1Deck]);
 
   useEffect(() => {}, [store]);
 
@@ -218,7 +235,10 @@ export default function Demo(): JSX.Element {
           </div>
         </div>
         <div className="grid grid-cols-12">
-          <div></div>
+          <div>
+            <h2>Deck</h2>
+            <pre>{JSON.stringify(player1Deck)}</pre>
+          </div>
           <div className="col-span-6 grid grid-cols-6">
             <div className="col-span-full">
               <h2>
