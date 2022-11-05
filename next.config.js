@@ -1,6 +1,10 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['encrypted-tbn0.gstatic.com', 'sunflower-land.com'],
+    domains: [
+      'www.gardenia.net',
+      'encrypted-tbn0.gstatic.com',
+      'sunflower-land.com',
+    ],
   },
 }

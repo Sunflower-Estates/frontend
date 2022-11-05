@@ -36,7 +36,13 @@ class Card {
 }
 
 //  Crops
-export const Sunflower: CardType = new Card("Sunflower", 0, CropType, 1, null);
+export const Sunflower: CardType = new Card(
+  "Sunflower",
+  0,
+  CropType,
+  1,
+  "https://www.gardenia.net/storage/app/public/uploads/images/detail/shutterstock_1260151384Optimized.webp"
+);
 export const Potato: CardType = new Card("Potato", 1, CropType, 2, null);
 export const Pumpkin: CardType = new Card("Pumpkin", 2, CropType, 3, null);
 export const Carrot: CardType = new Card("Carrot", 3, CropType, 4, null);

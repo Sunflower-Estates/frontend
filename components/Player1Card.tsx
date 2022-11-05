@@ -1,6 +1,6 @@
 import { MouseEvent, MouseEventHandler } from "react";
 
-import { CardDataType } from "../pages/demo";
+import { addCardToData, CardDataType } from "../pages/demo";
 import Card from "./Card";
 
 export type Player1CardPropsType = {
@@ -29,7 +29,7 @@ export default function Player1Card({
     });
 
     setPlayArea((prevState: CardDataType[]) => {
-      return [...prevState, data];
+      return addCardToData(data.card, prevState);
     });
   };
   return <Card data={data} handleClick={handleClick} />;
