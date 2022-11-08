@@ -56,6 +56,7 @@ import Player1Card from "../components/Player1Card";
 import Player2Card from "../components/Player2Card";
 import { Player2Hand } from "../components/Player2Hand";
 import SideStoreCard from "../components/SideStoreCard";
+import { CropStoreContext } from "../context/CropStoreContext";
 import { ModalContext } from "../context/ModalContext";
 
 // TYPES
@@ -272,8 +273,15 @@ export default function Demo(): JSX.Element {
         <Navbar />
         <main className="flex-grow bg-red-50">
           <div className="container mx-auto">
-            {/* <Player2Hand player2={player2} player2Hand={player2Hand} /> */}
-            <CropStore cropStore={cropStore} setCropStore={setCropStore} />
+            <CropStoreContext.Provider
+              value={{
+                cropStore: cropStore,
+                setCropStore: setCropStore,
+                setPlayArea: setPlayArea,
+              }}
+            >
+              <CropStore />
+            </CropStoreContext.Provider>
             <HarvestArea
               harvestArea={harvestArea}
               setHarvestArea={setHarvestArea}

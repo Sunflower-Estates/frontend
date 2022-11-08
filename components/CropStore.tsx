@@ -1,11 +1,21 @@
-import { CardDataType } from "../pages/demo";
+import { MouseEventHandler, useContext } from "react";
+
+import { CardType } from "../cards/Cards";
+import { CropStoreContext } from "../context/CropStoreContext";
+import { addCardToData, CardDataType } from "../pages/demo";
 import Card from "./Card";
 
-export type CropStorePropsType = {
-  cropStore: CardDataType[];
-  setCropStore: Function;
-};
-export function CropStore({ cropStore, setCropStore }: CropStorePropsType) {
+export function CropStore() {
+  const { cropStore, setCropStore, setPlayArea } = useContext(CropStoreContext);
+
+  function handleCardClick(card: CardType) {
+    //@ts-ignore
+    setPlayArea((prevArea: CardDataType[]) => {
+      let newPlayArea = addCardToData(card, prevArea);
+      return newPlayArea;
+    });
+  }
+
   return (
     <div className="grid grid-cols-10 gap-2.5 mb-5">
       <div className="col-span-full">
@@ -16,10 +26,8 @@ export function CropStore({ cropStore, setCropStore }: CropStorePropsType) {
           <Card
             key={"cropStore-" + cardData.card.name}
             data={cardData}
-            handleClick={() => {}}
-          >
-            a
-          </Card>
+            handleClick={() => handleCardClick(cardData.card)}
+          ></Card>
         );
       }, [])}
     </div>
