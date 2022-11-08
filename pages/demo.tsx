@@ -56,6 +56,7 @@ import Player1Card from "../components/Player1Card";
 import Player2Card from "../components/Player2Card";
 import { Player2Hand } from "../components/Player2Hand";
 import SideStoreCard from "../components/SideStoreCard";
+import { ModalContext } from "../context/ModalContext";
 
 // TYPES
 
@@ -71,20 +72,12 @@ export type CardDataType = {
   count: number;
 };
 
-//  enums
+//  ENUMS
 
 enum PhaseType {
   ACTION,
   BUY,
 }
-
-//  context
-export const ModalContext = createContext({
-  modalVisible: false,
-  setModalVisible: (visible: boolean): any => {},
-  modalCard: Sunflower,
-  setModalCard: (card: CardType): any => {},
-});
 
 // FUNCTIONS
 export const addCardToData = (
@@ -301,9 +294,6 @@ export default function Demo(): JSX.Element {
             />
           </div>
         </main>
-        <button className="btn" onClick={() => player1Draw(1)}>
-          Draw
-        </button>
       </ModalContext.Provider>
     </>
   );

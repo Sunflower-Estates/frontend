@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { MouseEventHandler } from "react";
 
-import { CardDataType, ModalContext } from "../pages/demo";
+import { ModalContext } from "../context/ModalContext";
+import { CardDataType } from "../pages/demo";
 import CardModal from "./CardModal";
 
 type CardProps = {
