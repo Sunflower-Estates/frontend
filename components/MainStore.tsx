@@ -1,6 +1,6 @@
 import { CardDataType } from "../pages/demo";
-import SideStoreCard from "./SideStoreCard";
 import ActionStoreCard from "./ActionStoreCard";
+import SideStoreCard from "./SideStoreCard";
 
 export type MainStorePropsType = {
   warbondStore: CardDataType[];

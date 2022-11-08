@@ -1,5 +1,13 @@
 import _ from "lodash";
-import { MouseEvent, useCallback, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import {
   Beetroot,
@@ -39,6 +47,7 @@ import {
 } from "../cards/Cards";
 import ActionStoreCard from "../components/ActionStoreCard";
 import Card from "../components/Card";
+import CardModal from "../components/CardModal";
 import { CropStore } from "../components/CropStore";
 import { MainStore } from "../components/MainStore";
 import Navbar from "../components/Navbar";
@@ -61,6 +70,21 @@ export type CardDataType = {
   card: CardType;
   count: number;
 };
+
+//  enums
+
+enum PhaseType {
+  ACTION,
+  BUY,
+}
+
+//  context
+export const ModalContext = createContext({
+  modalVisible: false,
+  setModalVisible: (visible: boolean): any => {},
+  modalCard: Sunflower,
+  setModalCard: (card: CardType): any => {},
+});
 
 // FUNCTIONS
 export const addCardToData = (
@@ -126,6 +150,8 @@ export const getCardDataCount = (array: CardDataType[]): number => {
 
 export default function Demo(): JSX.Element {
   //  STATE
+  const [phase, setPhase] = useState<PhaseType>(PhaseType.ACTION);
+
   const [player1, setPlayer1] = useState<PlayerType>({
     name: "truemiller",
     gold: 3,
@@ -144,6 +170,7 @@ export default function Demo(): JSX.Element {
   const [hasDrawn, setHasDrawn] = useState<boolean>();
 
   const [playArea, setPlayArea] = useState<CardDataType[]>([]);
+  const [harvestArea, setHarvestArea] = useState<CardDataType[]>([]);
 
   const [player1Deck, setPlayer1Deck] = useState<CardDataType[]>([
     { card: Sunflower, count: 7 },
@@ -155,7 +182,7 @@ export default function Demo(): JSX.Element {
 
   const [player1Hand, setPlayer1Hand] = useState<CardDataType[]>([]);
   const [player2Hand, setPlayer2Hand] = useState<CardDataType[]>([
-    ...new Array(6).fill(null),
+    ...new Array(5).fill(null),
   ]);
 
   const [cropStore, setCropStore] = useState<CardDataType[]>([
@@ -200,6 +227,11 @@ export default function Demo(): JSX.Element {
     { card: Treasury, count: 8 },
   ]);
 
+  const [modalCard, setModalCard] = useState<CardType>(Sunflower);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  // FUNCTIONS
+
   const player1Draw: Function = useCallback(
     (draws: number) => {
       if (!player1Deck || !player1Hand) return;
@@ -234,30 +266,45 @@ export default function Demo(): JSX.Element {
 
   return (
     <>
-      <Navbar />
-      <main className="flex-grow bg-red-50">
-        <div className="container mx-auto">
-          {/* <Player2Hand player2={player2} player2Hand={player2Hand} /> */}
-          <CropStore cropStore={cropStore} setCropStore={setCropStore} />
-          <MainStore
-            warbondStore={warbondStore}
-            setWarbondStore={setWarbondStore}
-            actionStore={actionStore}
-            setActionStore={setActionStore}
-          />
-          <PlayArea playArea={playArea} />
-          <Player1Area
-            player1={player1}
-            player1Hand={player1Hand}
-            setPlayer1Hand={setPlayer1Hand}
-            player1Deck={player1Deck}
-            setPlayArea={setPlayArea}
-          />
-        </div>
-      </main>
-      <button className="btn" onClick={() => player1Draw(1)}>
-        Draw
-      </button>
+      <ModalContext.Provider
+        value={{
+          modalVisible: modalVisible,
+          setModalVisible: setModalVisible,
+          modalCard: modalCard,
+          setModalCard: setModalCard,
+        }}
+      >
+        {modalVisible ? <CardModal card={modalCard} /> : null}
+
+        <Navbar />
+        <main className="flex-grow bg-red-50">
+          <div className="container mx-auto">
+            {/* <Player2Hand player2={player2} player2Hand={player2Hand} /> */}
+            <CropStore cropStore={cropStore} setCropStore={setCropStore} />
+            <HarvestArea
+              harvestArea={harvestArea}
+              setHarvestArea={setHarvestArea}
+            ></HarvestArea>
+            <MainStore
+              warbondStore={warbondStore}
+              setWarbondStore={setWarbondStore}
+              actionStore={actionStore}
+              setActionStore={setActionStore}
+            />
+            <PlayArea playArea={playArea} />
+            <Player1Area
+              player1={player1}
+              player1Hand={player1Hand}
+              setPlayer1Hand={setPlayer1Hand}
+              player1Deck={player1Deck}
+              setPlayArea={setPlayArea}
+            />
+          </div>
+        </main>
+        <button className="btn" onClick={() => player1Draw(1)}>
+          Draw
+        </button>
+      </ModalContext.Provider>
     </>
   );
 }
@@ -285,5 +332,18 @@ function PlayArea({ playArea }: PlayAreaPropsType) {
         <div className="col-span-1"></div>
       </div>
     </div>
+  );
+}
+
+type HarvestAreaPropsType = {
+  harvestArea: CardDataType[];
+  setHarvestArea: Function;
+};
+function HarvestArea({ harvestArea, setHarvestArea }: HarvestAreaPropsType) {
+  return (
+    <>
+      <h2>Harvest Area</h2>
+      {JSON.stringify(harvestArea)}
+    </>
   );
 }
