@@ -32,6 +32,7 @@ export default function Player1Card({ data }: Player1CardPropsType) {
         ...prevPlayer1,
         gold: prevPlayer1.gold + data.card.goldGranted,
       };
+      return newPlayer1;
     });
   };
   return <Card data={data} handleClick={handleClick} />;

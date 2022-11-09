@@ -309,6 +309,7 @@ export default function Demo(): JSX.Element {
             <Player1AreaContext.Provider
               value={{
                 player1: player1,
+                setPlayer1: setPlayer1,
                 player1Hand: player1Hand,
                 setPlayer1Hand: setPlayer1Hand,
                 player1Deck: player1Deck,

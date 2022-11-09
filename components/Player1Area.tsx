@@ -20,11 +20,7 @@ export function Player1Area() {
             actions - {player1.victory} VP
           </h2>
         </div>
-        <Player1Hand
-          player1Hand={player1Hand}
-          setPlayer1Hand={setPlayer1Hand}
-          setPlayArea={setPlayArea}
-        />
+        <Player1Hand />
       </div>
       <div>
         <h2>Deck</h2>
