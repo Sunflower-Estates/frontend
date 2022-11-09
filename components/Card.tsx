@@ -30,6 +30,13 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
       }}
       className="bg-red-200 hover:bg-red-300 card grid grid-cols-2"
     >
+      <div></div>
+      <div
+        className="bg-red-500 rounded-full text-center ml-auto flex width"
+        style={{ width: "25px", height: "25px" }}
+      >
+        {data.count == Infinity ? "∞" : data.count}
+      </div>
       {/* <div>{data.card.name}</div>
       <div>
         <div
