@@ -20,19 +20,10 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
   }
 
   return (
-    <div
-      onClick={handleClick}
-      onContextMenu={handleRightClick}
-      style={{
-        aspectRatio: 2 / 3,
-        background: `url(${data.card.image})` ?? "",
-        backgroundSize: "cover",
-      }}
-      className="bg-red-200 hover:bg-red-300 card grid grid-cols-2"
-    >
-      <div></div>
+    <div onClick={handleClick} onContextMenu={handleRightClick} className="">
+      <img src={`${data.card.image}`} alt="" />
       <div
-        className="bg-red-500 rounded-full text-center ml-auto flex width"
+        className="top-0 bg-red-500 rounded-full text-center ml-auto "
         style={{ width: "25px", height: "25px" }}
       >
         {data.count == Infinity ? "∞" : data.count}
