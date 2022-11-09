@@ -5,6 +5,7 @@ import {
   MouseEvent,
   SetStateAction,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from "react";
@@ -16,7 +17,6 @@ import {
   Carrot,
   Cauliflower,
   Fertilizer,
-  Firelighter,
   GoblinBalloon,
   GoblinBlacksmith,
   GoblinCarry,
@@ -49,6 +49,7 @@ import ActionStoreCard from "../components/ActionStoreCard";
 import Card from "../components/Card";
 import CardModal from "../components/CardModal";
 import { CropStore } from "../components/CropStore";
+import { HarvestArea } from "../components/HarvestArea";
 import { MainStore } from "../components/MainStore";
 import Navbar from "../components/Navbar";
 import { Player1Area } from "../components/Player1Area";
@@ -57,6 +58,7 @@ import Player2Card from "../components/Player2Card";
 import { Player2Hand } from "../components/Player2Hand";
 import WarbondStoreCard from "../components/WarbondStoreCard";
 import { CropStoreContext } from "../context/CropStoreContext";
+import { HarvestAreaContext } from "../context/HarvestAreaContext";
 import { MainStoreContext } from "../context/MainStoreContext";
 import { ModalContext } from "../context/ModalContext";
 import { Player1AreaContext } from "../context/Player1AreaContext";
@@ -287,10 +289,18 @@ export default function Demo(): JSX.Element {
             >
               <CropStore />
             </CropStoreContext.Provider>
-            <HarvestArea
-              harvestArea={harvestArea}
-              setHarvestArea={setHarvestArea}
-            ></HarvestArea>
+            <HarvestAreaContext.Provider
+              value={{
+                harvestArea: harvestArea,
+                setHarvestArea: setHarvestArea,
+                playArea: playArea,
+                setPlayArea: setPlayArea,
+                player1: player1,
+                setPlayer1: setPlayer1,
+              }}
+            >
+              <HarvestArea></HarvestArea>
+            </HarvestAreaContext.Provider>
             <MainStoreContext.Provider
               value={{
                 warbondStore: warbondStore,
@@ -349,18 +359,5 @@ function PlayArea({ playArea }: PlayAreaPropsType) {
         <div className="col-span-1"></div>
       </div>
     </div>
-  );
-}
-
-type HarvestAreaPropsType = {
-  harvestArea: CardDataType[];
-  setHarvestArea: Function;
-};
-function HarvestArea({ harvestArea, setHarvestArea }: HarvestAreaPropsType) {
-  return (
-    <>
-      <h2>Harvest Area</h2>
-      {JSON.stringify(harvestArea)}
-    </>
   );
 }
