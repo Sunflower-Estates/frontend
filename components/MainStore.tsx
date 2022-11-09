@@ -6,10 +6,6 @@ import ActionStoreCard from "./ActionStoreCard";
 import WarbondStoreCard from "./WarbondStoreCard";
 
 export function MainStore() {
-  const mainStoreContext = useContext(MainStoreContext);
-  if (!mainStoreContext) return null;
-  const { warbondStore, setWarbondStore, actionStore, setActionStore } =
-    mainStoreContext;
   return (
     <div className="grid grid-cols-10 bg-red-50 gap-5 mb-5">
       <div className="col-span-8">
@@ -26,16 +22,11 @@ function WarbondStore() {
   const warbondStoreContext = useContext(MainStoreContext);
   if (!warbondStoreContext) return null;
   const { warbondStore, setWarbondStore } = warbondStoreContext;
-
   return (
     <div className="col-span-2 grid grid-cols-2 bg-red-100 gap-2.5">
       <h2 className="col-span-full">Warbond Store</h2>
       {warbondStore.map((data: CardDataType) => (
-        <WarbondStoreCard
-          key={"sideStore-" + data.card.name}
-          data={data}
-          setSideStore={setWarbondStore}
-        />
+        <WarbondStoreCard key={"sideStore-" + data.card.name} data={data} />
       ))}
     </div>
   );

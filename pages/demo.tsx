@@ -296,6 +296,10 @@ export default function Demo(): JSX.Element {
                 setWarbondStore: setWarbondStore,
                 actionStore: actionStore,
                 setActionStore: setActionStore,
+                player1: player1,
+                setPlayer1: setPlayer1,
+                playArea: playArea,
+                setPlayArea: setPlayArea,
               }}
             >
               <MainStore />
