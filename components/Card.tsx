@@ -26,10 +26,11 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
       style={{
         aspectRatio: 2 / 3,
         background: `url(${data.card.image})` ?? "",
+        backgroundSize: "cover",
       }}
       className="bg-red-200 hover:bg-red-300 card grid grid-cols-2"
     >
-      <div>{data.card.name}</div>
+      {/* <div>{data.card.name}</div>
       <div>
         <div
           className="ml-auto bg-yellow-500 rounded-full text-center"
@@ -46,7 +47,7 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
           {data.count}
         </div>
       </div>
-      <div></div>
+      <div></div> */}
     </div>
   );
 }

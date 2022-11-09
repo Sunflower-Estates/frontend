@@ -196,7 +196,7 @@ export default function Demo(): JSX.Element {
 
   const [actionStore, setActionStore] = useState<CardDataType[]>([
     { card: Fertilizer, count: 10 },
-    { card: Firelighter, count: 10 },
+    // { card: Firelighter, count: 10 },
     { card: GoblinBalloon, count: 10 },
     { card: HumanBlacksmith, count: 10 },
     { card: GoblinBlacksmith, count: 10 },
