@@ -55,7 +55,7 @@ import { Player1Area } from "../components/Player1Area";
 import Player1Card from "../components/Player1Card";
 import Player2Card from "../components/Player2Card";
 import { Player2Hand } from "../components/Player2Hand";
-import SideStoreCard from "../components/SideStoreCard";
+import WarbondStoreCard from "../components/WarbondStoreCard";
 import { CropStoreContext } from "../context/CropStoreContext";
 import { MainStoreContext } from "../context/MainStoreContext";
 import { ModalContext } from "../context/ModalContext";
