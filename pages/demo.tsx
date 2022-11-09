@@ -57,6 +57,7 @@ import Player2Card from "../components/Player2Card";
 import { Player2Hand } from "../components/Player2Hand";
 import SideStoreCard from "../components/SideStoreCard";
 import { CropStoreContext } from "../context/CropStoreContext";
+import { MainStoreContext } from "../context/MainStoreContext";
 import { ModalContext } from "../context/ModalContext";
 
 // TYPES
@@ -289,12 +290,16 @@ export default function Demo(): JSX.Element {
               harvestArea={harvestArea}
               setHarvestArea={setHarvestArea}
             ></HarvestArea>
-            <MainStore
-              warbondStore={warbondStore}
-              setWarbondStore={setWarbondStore}
-              actionStore={actionStore}
-              setActionStore={setActionStore}
-            />
+            <MainStoreContext.Provider
+              value={{
+                warbondStore: warbondStore,
+                setWarbondStore: setWarbondStore,
+                actionStore: actionStore,
+                setActionStore: setActionStore,
+              }}
+            >
+              <MainStore />
+            </MainStoreContext.Provider>
             <PlayArea playArea={playArea} />
             <Player1Area
               player1={player1}

@@ -1,19 +1,15 @@
+import { useContext } from "react";
+
+import { MainStoreContext } from "../context/MainStoreContext";
 import { CardDataType } from "../pages/demo";
 import ActionStoreCard from "./ActionStoreCard";
 import SideStoreCard from "./SideStoreCard";
 
-export type MainStorePropsType = {
-  warbondStore: CardDataType[];
-  setWarbondStore: Function;
-  actionStore: CardDataType[];
-  setActionStore: Function;
-};
-export function MainStore({
-  warbondStore,
-  setWarbondStore,
-  actionStore,
-  setActionStore,
-}: MainStorePropsType) {
+export function MainStore() {
+  const mainStoreContext = useContext(MainStoreContext);
+  if (!mainStoreContext) return null;
+  const { warbondStore, setWarbondStore, actionStore, setActionStore } =
+    mainStoreContext;
   return (
     <div className="grid grid-cols-10 bg-red-50 gap-5 mb-5">
       <div className="col-span-8">
