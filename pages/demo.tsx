@@ -277,7 +277,10 @@ export default function Demo(): JSX.Element {
               value={{
                 cropStore: cropStore,
                 setCropStore: setCropStore,
+                playArea: playArea,
                 setPlayArea: setPlayArea,
+                player1: player1,
+                setPlayer1: setPlayer1,
               }}
             >
               <CropStore />
