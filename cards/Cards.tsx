@@ -114,28 +114,28 @@ export const Ticket: CardType = new Card(
   10,
   WarbondType,
   0,
-  "img/cards/Warbond_Ticket.png"
+  "/img/cards/Warbond_Ticket.png"
 );
 export const Tribute: CardType = new Card(
   "Tribute",
   0,
   WarbondType,
   0,
-  "img/cards/Warbond_Tribute.png"
+  "/img/cards/Warbond_Tribute.png"
 );
 export const Patron: CardType = new Card(
   "Patron",
   20,
   WarbondType,
   0,
-  "img/cards/Warbond_Patron.png"
+  "/img/cards/Warbond_Patron.png"
 );
 export const Treasury: CardType = new Card(
   "Treasury",
   0,
   WarbondType,
   0,
-  "img/cards/Warbond_Treasury.png"
+  "/img/cards/Warbond_Treasury.png"
 );
 
 // Action Cards
@@ -144,133 +144,133 @@ export const Fertilizer: CardType = new Card(
   1,
   ActionType,
   0,
-  "img/cards/Base_Set_Fertilizer.png"
+  "/img/cards/Base_Set_Fertilizer.png"
 );
 // export const Firelighter: CardType = new Card(
 //   "Firelighter",
 //   1,
 //   ActionType,
 //   0,
-//   "img/cards/Base_Set_Firelighter.png"
+//   "/img/cards/Base_Set_Firelighter.png"
 // );
 export const GoblinBalloon: CardType = new Card(
   "Goblin Balloon",
   3,
   ActionType,
   0,
-  "img/cards/Base_Set_Goblin_Balloon.png"
+  "/img/cards/Base_Set_Goblin_Balloon.png"
 );
 export const HumanBlacksmith: CardType = new Card(
   "Human Blacksmith",
   6,
   ActionType,
   0,
-  "img/cards/Base_Set_Human_Blacksmith.png"
+  "/img/cards/Base_Set_Human_Blacksmith.png"
 );
 export const GoblinBlacksmith: CardType = new Card(
   "Goblin Blacksmith",
   5,
   ActionType,
   0,
-  "img/cards/Base_Set_Goblin_Blacksmith.png"
+  "/img/cards/Base_Set_Goblin_Blacksmith.png"
 );
 export const GoblinCarry: CardType = new Card(
   "Goblin Carry",
   8,
   ActionType,
   0,
-  "img/cards/Base_Set_Goblin_Carry.png"
+  "/img/cards/Base_Set_Goblin_Carry.png"
 );
 export const GoblinFarmer: CardType = new Card(
   "Goblin Farmer",
   8,
   ActionType,
   0,
-  "img/cards/Base_Set_Goblin_Farmer.png"
+  "/img/cards/Base_Set_Goblin_Farmer.png"
 );
 export const HumanFarmer: CardType = new Card(
   "Human Farmer",
   5,
   ActionType,
   0,
-  "img/cards/Base_Set_Human_Farmer.png"
+  "/img/cards/Base_Set_Human_Farmer.png"
 );
 export const Mine: CardType = new Card(
   "Mine",
   3,
   ActionType,
   0,
-  "img/cards/Base_Set_Mine.png"
+  "/img/cards/Base_Set_Mine.png"
 );
 export const Resources: CardType = new Card(
   "Resources",
   5,
   ActionType,
   0,
-  "img/cards/Base_Set_Resources.png"
+  "/img/cards/Base_Set_Resources.png"
 );
 export const RustyShovel: CardType = new Card(
   "Rusty Shovel",
   3,
   ActionType,
   0,
-  "img/cards/Base_Set_Rusty_Shovel.png"
+  "/img/cards/Base_Set_Rusty_Shovel.png"
 );
 export const IronShovel: CardType = new Card(
   "Iron Shovel",
   8,
   ActionType,
   0,
-  "img/cards/Base_Set_Iron_Shovel.png"
+  "/img/cards/Base_Set_Iron_Shovel.png"
 );
 export const Shop: CardType = new Card(
   "Shop",
   6,
   ActionType,
   0,
-  "img/cards/Base_Set_Shop.png"
+  "/img/cards/Base_Set_Shop.png"
 );
 export const WishingWell: CardType = new Card(
   "Wishing Well",
   6,
   ActionType,
   0,
-  "img/cards/Base_Set_Wishing_Well.png"
+  "/img/cards/Base_Set_Wishing_Well.png"
 );
 export const TravelingSalesman: CardType = new Card(
   "Traveling Salesman",
   4,
   ActionType,
   0,
-  "img/cards/Base_Set_Traveling_Salesman.png"
+  "/img/cards/Base_Set_Traveling_Salesman.png"
 );
 export const Tailor: CardType = new Card(
   "Tailor",
   3,
   ActionType,
   0,
-  "img/cards/Base_Set_Tailor.png"
+  "/img/cards/Base_Set_Tailor.png"
 );
 export const HumanWarrior: CardType = new Card(
   "Human Warrior",
   10,
   ActionType,
   0,
-  "img/cards/Base_Set_Human_Warrior.png"
+  "/img/cards/Base_Set_Human_Warrior.png"
 );
 export const GoblinWarrior: CardType = new Card(
   "Goblin Warrior",
   9,
   ActionType,
   0,
-  "img/cards/Base_Set_Goblin_Warrior.png"
+  "/img/cards/Base_Set_Goblin_Warrior.png"
 );
 export const RadishPie: CardType = new Card(
   "Radish Pie",
   0,
   ActionType,
   0,
-  "img/cards/Base_Set_Radish_Pie.png"
+  "/img/cards/Base_Set_Radish_Pie.png"
 );
 
 // RESOURCES
