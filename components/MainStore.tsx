@@ -40,7 +40,7 @@ function ActionStore() {
     <div className="col-span-8 grid grid-cols-10 gap-2.5">
       <h2 className="col-span-full">Action Store</h2>
       {actionStore.map((data: CardDataType) => (
-         <ActionStoreCard key={"store-" + data.card.name} data={data} />;
+        <ActionStoreCard key={"store-" + data.card.name} data={data} />
       ))}
     </div>
   );

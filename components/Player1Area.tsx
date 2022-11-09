@@ -1,20 +1,14 @@
+import { useContext } from "react";
+
+import { Player1AreaContext } from "../context/Player1AreaContext";
 import { CardDataType, getCardDataCount, PlayerType } from "../pages/demo";
 import Player1Card from "./Player1Card";
 
-export type Player1AreaPropsType = {
-  player1: PlayerType;
-  player1Hand: CardDataType[];
-  setPlayer1Hand: Function;
-  player1Deck: CardDataType[];
-  setPlayArea: Function;
-};
-export function Player1Area({
-  player1,
-  player1Hand,
-  setPlayer1Hand,
-  player1Deck,
-  setPlayArea,
-}: Player1AreaPropsType) {
+export function Player1Area() {
+  const player1AreaContext = useContext(Player1AreaContext);
+  if (!player1AreaContext) return null;
+  const { player1, player1Hand, setPlayer1Hand, setPlayArea, player1Deck } =
+    player1AreaContext;
   return (
     <div className="grid grid-cols-12">
       <div>Resources</div>
@@ -40,26 +34,15 @@ export function Player1Area({
   );
 }
 
-type Player1HandPropsType = {
-  player1Hand: CardDataType[];
-  setPlayer1Hand: Function;
-  setPlayArea: Function;
-};
-function Player1Hand({
-  player1Hand,
-  setPlayer1Hand,
-  setPlayArea,
-}: Player1HandPropsType) {
+function Player1Hand() {
+  const player1AreaContext = useContext(Player1AreaContext);
+  if (!player1AreaContext) return null;
+  const { player1Hand, setPlayer1Hand, setPlayArea } = player1AreaContext;
   return (
     <>
       {(player1Hand ?? [])?.map((data: CardDataType) => {
         return (
-          <Player1Card
-            key={"player1Hand-" + data.card.name}
-            data={data}
-            setPlayer1Hand={setPlayer1Hand}
-            setPlayArea={setPlayArea}
-          />
+          <Player1Card key={"player1Hand-" + data.card.name} data={data} />
         );
       })}
     </>

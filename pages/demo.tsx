@@ -59,6 +59,7 @@ import WarbondStoreCard from "../components/WarbondStoreCard";
 import { CropStoreContext } from "../context/CropStoreContext";
 import { MainStoreContext } from "../context/MainStoreContext";
 import { ModalContext } from "../context/ModalContext";
+import { Player1AreaContext } from "../context/Player1AreaContext";
 
 // TYPES
 
@@ -305,13 +306,18 @@ export default function Demo(): JSX.Element {
               <MainStore />
             </MainStoreContext.Provider>
             <PlayArea playArea={playArea} />
-            <Player1Area
-              player1={player1}
-              player1Hand={player1Hand}
-              setPlayer1Hand={setPlayer1Hand}
-              player1Deck={player1Deck}
-              setPlayArea={setPlayArea}
-            />
+            <Player1AreaContext.Provider
+              value={{
+                player1: player1,
+                player1Hand: player1Hand,
+                setPlayer1Hand: setPlayer1Hand,
+                player1Deck: player1Deck,
+                setPlayer1Deck: setPlayer1Deck,
+                setPlayArea: setPlayArea,
+              }}
+            >
+              <Player1Area />
+            </Player1AreaContext.Provider>
           </div>
         </main>
       </ModalContext.Provider>

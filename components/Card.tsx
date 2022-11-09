@@ -23,7 +23,10 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
     <div
       onClick={handleClick}
       onContextMenu={handleRightClick}
-      style={{ aspectRatio: 2 / 3 }}
+      style={{
+        aspectRatio: 2 / 3,
+        background: `url(${data.card.image})` ?? "",
+      }}
       className="bg-red-200 hover:bg-red-300 card grid grid-cols-2"
     >
       <div>{data.card.name}</div>
