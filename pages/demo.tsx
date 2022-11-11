@@ -256,12 +256,13 @@ export default function Demo(): JSX.Element {
   );
 
   const endTurn: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
-    setPlayArea([]);
     setPlayer1Deck((prevPlayer1Deck) => {
-      return [...prevPlayer1Deck, ...playArea];
+      return [...prevPlayer1Deck, ...playArea, ...player1Hand];
     });
+    setPlayArea([]);
+    setPlayer1Hand([]);
     setHasDrawn(false);
-  }, [playArea, player1Draw]);
+  }, [playArea, player1Hand]);
 
   // EFFECTS
   useEffect(() => {
