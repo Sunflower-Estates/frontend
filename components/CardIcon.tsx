@@ -26,11 +26,19 @@ export default function CardIcon({
   return (
     <div onClick={handleClick} onContextMenu={handleRightClick} className="">
       <Image src={`${data.card.iconImage}`} alt="" width={350} height={350} />
-      <div
-        className="top-0 bg-red-500 rounded-full text-center ml-auto "
-        style={{ width: "25px", height: "25px" }}
-      >
-        {data.count == Infinity ? "∞" : data.count}
+      <div className="flex">
+        <div
+          className="top-0 bg-yellow-500 rounded-full text-center mr-auto "
+          style={{ width: "25px", height: "25px" }}
+        >
+          {data.card.goldCost}
+        </div>
+        <div
+          className="top-0 bg-red-500 rounded-full text-center ml-auto "
+          style={{ width: "25px", height: "25px" }}
+        >
+          {data.count == Infinity ? "∞" : data.count}
+        </div>
       </div>
     </div>
   );
