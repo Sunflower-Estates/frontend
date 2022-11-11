@@ -11,7 +11,10 @@ export function HarvestArea() {
   const { harvestArea } = harvestAreaContext;
   return (
     <>
-      <div className="grid grid-cols-12">
+      <div
+        className="grid grid-cols-12 bg-white border"
+        style={{ minHeight: "230px" }}
+      >
         <h2 className="col-span-12">Harvest Area</h2>
         {harvestArea.map((data) => {
           return (

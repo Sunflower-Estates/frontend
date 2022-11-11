@@ -73,7 +73,7 @@ export const Pumpkin: CardType = new Card(
 );
 export const Carrot: CardType = new Card(
   "Carrot",
-  3,
+  4,
   CropType,
   4,
   "/img/cards/Crop_Carrot.png",
@@ -82,7 +82,7 @@ export const Carrot: CardType = new Card(
 );
 export const Cabbage: CardType = new Card(
   "Cabbage",
-  4,
+  6,
   CropType,
   5,
   "/img/cards/Crop_Cabbage.png",
@@ -91,7 +91,7 @@ export const Cabbage: CardType = new Card(
 );
 export const Beetroot: CardType = new Card(
   "Beetroot",
-  5,
+  8,
   CropType,
   6,
   "/img/cards/Crop_Beetroot.png",
@@ -100,7 +100,7 @@ export const Beetroot: CardType = new Card(
 );
 export const Cauliflower: CardType = new Card(
   "Cauliflower",
-  6,
+  10,
   CropType,
   7,
   "/img/cards/Crop_Cauliflower.png",
@@ -109,7 +109,7 @@ export const Cauliflower: CardType = new Card(
 );
 export const Parsnip: CardType = new Card(
   "Parsnip",
-  7,
+  12,
   CropType,
   8,
   "/img/cards/Crop_Parsnip.png",
@@ -118,7 +118,7 @@ export const Parsnip: CardType = new Card(
 );
 export const Wheat: CardType = new Card(
   "Wheat",
-  8,
+  14,
   CropType,
   9,
   "/img/cards/Crop_Wheat.png",
@@ -127,7 +127,7 @@ export const Wheat: CardType = new Card(
 );
 export const Radish: CardType = new Card(
   "Radish",
-  9,
+  14,
   CropType,
   10,
   "/img/cards/Crop_Radish.png",
@@ -176,7 +176,7 @@ export const Treasury: CardType = new Card(
 // Action Cards
 export const Fertilizer: CardType = new Card(
   "Fertilizer",
-  1,
+  2,
   ActionType,
   0,
   "/img/cards/Base_Set_Fertilizer.png",
@@ -240,7 +240,7 @@ export const HumanFarmer: CardType = new Card(
 );
 export const Mine: CardType = new Card(
   "Mine",
-  3,
+  6,
   ActionType,
   0,
   "/img/cards/Base_Set_Mine.png",
@@ -249,7 +249,7 @@ export const Mine: CardType = new Card(
 );
 export const Resources: CardType = new Card(
   "Resources",
-  5,
+  6,
   ActionType,
   0,
   "/img/cards/Base_Set_Resources.png",
@@ -303,7 +303,7 @@ export const TravelingSalesman: CardType = new Card(
 );
 export const Tailor: CardType = new Card(
   "Tailor",
-  3,
+  8,
   ActionType,
   0,
   "/img/cards/Base_Set_Tailor.png",
@@ -321,7 +321,7 @@ export const HumanWarrior: CardType = new Card(
 );
 export const GoblinWarrior: CardType = new Card(
   "Goblin Warrior",
-  9,
+  10,
   ActionType,
   0,
   "/img/cards/Base_Set_Goblin_Warrior.png",

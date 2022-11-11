@@ -3,6 +3,7 @@ import {
   createContext,
   Dispatch,
   MouseEvent,
+  MouseEventHandler,
   SetStateAction,
   useCallback,
   useContext,
@@ -154,16 +155,16 @@ export default function Demo(): JSX.Element {
 
   const [player1, setPlayer1] = useState<PlayerType>({
     name: "truemiller",
-    gold: 3,
-    actions: 3,
-    victory: 3,
+    gold: 0,
+    actions: 0,
+    victory: 0,
   });
 
   const [player2, setPlayer2] = useState<PlayerType>({
     name: "supersynapse",
-    gold: 3,
-    actions: 3,
-    victory: 3,
+    gold: 0,
+    actions: 0,
+    victory: 0,
   });
 
   const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
@@ -200,7 +201,6 @@ export default function Demo(): JSX.Element {
 
   const [actionStore, setActionStore] = useState<CardDataType[]>([
     { card: Fertilizer, count: 10 },
-    // { card: Firelighter, count: 10 },
     { card: GoblinBalloon, count: 10 },
     { card: HumanBlacksmith, count: 10 },
     { card: GoblinBlacksmith, count: 10 },
@@ -254,6 +254,15 @@ export default function Demo(): JSX.Element {
     },
     [player1Deck, player1Hand]
   );
+
+  const endTurn: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    setPlayer1Deck((prevPlayer1Deck) => {
+      return [...prevPlayer1Deck, ...playArea, ...player1Hand];
+    });
+    setPlayArea([]);
+    setPlayer1Hand([]);
+    setHasDrawn(false);
+  }, [playArea, player1Hand]);
 
   // EFFECTS
   useEffect(() => {
@@ -342,6 +351,9 @@ export default function Demo(): JSX.Element {
           </div>
         </main>
       </ModalContext.Provider>
+      <button className="px-5 py-3 bg-red-500" onClick={endTurn}>
+        End Turn
+      </button>
     </>
   );
 }

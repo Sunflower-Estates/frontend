@@ -23,7 +23,11 @@ export default function CardHalf({ data, handleClick }: CardProps) {
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleRightClick} className="">
+    <div
+      onClick={handleClick}
+      onContextMenu={handleRightClick}
+      className="cursor-pointer"
+    >
       <img src={`${data.card.halfCardImage}`} alt="" width={350} height={350} />
       <div className="flex">
         <div
