@@ -10,7 +10,10 @@ type CardProps = {
   data: CardDataType;
   handleClick: MouseEventHandler;
 };
-export default function Card({ data, handleClick }: CardProps): JSX.Element {
+export default function CardIcon({
+  data,
+  handleClick,
+}: CardProps): JSX.Element {
   const { modalVisible, setModalVisible, modalCard, setModalCard } =
     useContext(ModalContext);
 
@@ -22,7 +25,7 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
 
   return (
     <div onClick={handleClick} onContextMenu={handleRightClick} className="">
-      <Image src={`${data.card.cardImage}`} alt="" width={350} height={700} />
+      <Image src={`${data.card.iconImage}`} alt="" width={350} height={350} />
       <div
         className="top-0 bg-red-500 rounded-full text-center ml-auto "
         style={{ width: "25px", height: "25px" }}

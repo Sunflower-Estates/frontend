@@ -8,6 +8,7 @@ import {
   removeCardFromData,
 } from "../pages/demo";
 import Card from "./Card";
+import CardHalf from "./CardHalf";
 type StoreCardPropsType = {
   data: CardDataType;
 };
@@ -32,5 +33,5 @@ export default function ActionStoreCard({ data }: StoreCardPropsType) {
       });
     }
   };
-  return <Card data={data} handleClick={handleClick} />;
+  return <CardHalf data={data} handleClick={handleClick} />;
 }
