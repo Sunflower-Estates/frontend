@@ -21,7 +21,11 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleRightClick} className="">
+    <div
+      onClick={handleClick}
+      onContextMenu={handleRightClick}
+      className="cursor-pointer"
+    >
       <Image src={`${data.card.cardImage}`} alt="" width={350} height={700} />
       <div
         className="top-0 bg-red-500 rounded-full text-center ml-auto "

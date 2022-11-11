@@ -155,16 +155,16 @@ export default function Demo(): JSX.Element {
 
   const [player1, setPlayer1] = useState<PlayerType>({
     name: "truemiller",
-    gold: 3,
-    actions: 3,
-    victory: 3,
+    gold: 0,
+    actions: 0,
+    victory: 0,
   });
 
   const [player2, setPlayer2] = useState<PlayerType>({
     name: "supersynapse",
-    gold: 3,
-    actions: 3,
-    victory: 3,
+    gold: 0,
+    actions: 0,
+    victory: 0,
   });
 
   const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
@@ -201,7 +201,6 @@ export default function Demo(): JSX.Element {
 
   const [actionStore, setActionStore] = useState<CardDataType[]>([
     { card: Fertilizer, count: 10 },
-    // { card: Firelighter, count: 10 },
     { card: GoblinBalloon, count: 10 },
     { card: HumanBlacksmith, count: 10 },
     { card: GoblinBlacksmith, count: 10 },

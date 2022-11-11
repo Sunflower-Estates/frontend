@@ -24,8 +24,12 @@ export default function CardIcon({
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleRightClick} className="">
-      <Image src={`${data.card.iconImage}`} alt="" width={350} height={350} />
+    <div
+      onClick={handleClick}
+      onContextMenu={handleRightClick}
+      className="cursor-pointer"
+    >
+      <Image src={`${data.card.iconImage}`} alt="" width={150} height={150} />
       <div className="flex">
         <div
           className="top-0 bg-yellow-500 rounded-full text-center mr-auto "

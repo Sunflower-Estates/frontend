@@ -43,7 +43,10 @@ export function CropStore() {
   }
 
   return (
-    <div className="grid grid-cols-10 gap-2.5 mb-5">
+    <div
+      className="grid grid-cols-10 gap-2.5 mb-5"
+      style={{ minHeight: "100px" }}
+    >
       <div className="col-span-full">
         <h2>Crop Store</h2>
       </div>
