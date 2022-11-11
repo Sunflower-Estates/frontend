@@ -21,7 +21,7 @@ export function MainStore() {
 function WarbondStore() {
   const warbondStoreContext = useContext(MainStoreContext);
   if (!warbondStoreContext) return null;
-  const { warbondStore, setWarbondStore } = warbondStoreContext;
+  const { warbondStore } = warbondStoreContext;
   return (
     <div className="col-span-2 grid grid-cols-2 bg-red-100 gap-2.5">
       <h2 className="col-span-full">Warbond Store</h2>
@@ -35,7 +35,7 @@ function WarbondStore() {
 function ActionStore() {
   const mainStoreContext = useContext(MainStoreContext);
   if (!mainStoreContext) return null;
-  const { actionStore, setActionStore } = mainStoreContext;
+  const { actionStore } = mainStoreContext;
   return (
     <div className="col-span-8 grid grid-cols-10 gap-2.5">
       <h2 className="col-span-full">Action Store</h2>

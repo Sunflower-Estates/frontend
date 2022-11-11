@@ -3,6 +3,7 @@ import {
   createContext,
   Dispatch,
   MouseEvent,
+  MouseEventHandler,
   SetStateAction,
   useCallback,
   useContext,
@@ -255,6 +256,14 @@ export default function Demo(): JSX.Element {
     [player1Deck, player1Hand]
   );
 
+  const endTurn: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    setPlayArea([]);
+    setPlayer1Deck((prevPlayer1Deck) => {
+      return [...prevPlayer1Deck, ...playArea];
+    });
+    setHasDrawn(false);
+  }, [playArea, player1Draw]);
+
   // EFFECTS
   useEffect(() => {
     //  draw card on load
@@ -342,6 +351,9 @@ export default function Demo(): JSX.Element {
           </div>
         </main>
       </ModalContext.Provider>
+      <button className="px-5 py-3 bg-red-500" onClick={endTurn}>
+        End Turn
+      </button>
     </>
   );
 }
