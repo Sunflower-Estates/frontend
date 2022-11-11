@@ -9,6 +9,7 @@ import {
   removeCardFromData,
 } from "../pages/demo";
 import Card from "./Card";
+import CardIcon from "./CardIcon";
 
 export function CropStore() {
   const cropStoreContext = useContext(CropStoreContext);
@@ -48,11 +49,11 @@ export function CropStore() {
       </div>
       {cropStore.map((cardData) => {
         return (
-          <Card
+          <CardIcon
             key={"cropStore-" + cardData.card.name}
             data={cardData}
             handleClick={() => handleCardClick(cardData.card)}
-          ></Card>
+          ></CardIcon>
         );
       }, [])}
     </div>

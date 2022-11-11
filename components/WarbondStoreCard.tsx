@@ -8,6 +8,7 @@ import {
   removeCardFromData,
 } from "../pages/demo";
 import Card from "./Card";
+import CardHalf from "./CardHalf";
 export type SideStoreCardPropsType = {
   data: CardDataType;
 };
@@ -39,5 +40,5 @@ export default function WarbondStoreCard({ data }: SideStoreCardPropsType) {
     }
   };
 
-  return <Card data={data} handleClick={handleClick} />;
+  return <CardHalf data={data} handleClick={handleClick} />;
 }
