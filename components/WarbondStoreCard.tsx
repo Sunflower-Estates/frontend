@@ -32,6 +32,7 @@ export default function WarbondStoreCard({ data }: SideStoreCardPropsType) {
         const newPlayer1 = {
           ...prevPlayer1,
           gold: prevPlayer1.gold - data.card.goldCost,
+          victory: prevPlayer1.victory + data.card.victoryValue,
         };
         return newPlayer1;
       });

@@ -72,6 +72,7 @@ export type PlayerType = {
   name: string;
   gold: number;
   actions: number;
+  buys: number;
   victory: number;
 };
 
@@ -83,8 +84,13 @@ export type CardDataType = {
 //  ENUMS
 
 enum PhaseType {
-  ACTION,
-  BUY,
+  PREHARVEST, // 0. turn plants up right in plots
+  HARVEST, // 1. plots can be harvested to play area
+  ACTION, // 2. action cards played
+  PLANT, // 3. plant cards from hand to crop plots
+  BUY, // 4. buy and goes into discard pile
+  PRECLEANUP, // 5. any effects at end of turn
+  CLEANUP, // 6. all cards discards from play area and hand; then deal
 }
 
 // FUNCTIONS
@@ -151,13 +157,14 @@ export const getCardDataCount = (array: CardDataType[]): number => {
 
 export default function Demo(): JSX.Element {
   //  STATE
-  const [phase, setPhase] = useState<PhaseType>(PhaseType.ACTION);
+  const [phase, setPhase] = useState<PhaseType>(PhaseType.HARVEST);
 
   const [player1, setPlayer1] = useState<PlayerType>({
     name: "truemiller",
     gold: 0,
     actions: 0,
     victory: 0,
+    buys: 0,
   });
 
   const [player2, setPlayer2] = useState<PlayerType>({
@@ -165,6 +172,7 @@ export default function Demo(): JSX.Element {
     gold: 0,
     actions: 0,
     victory: 0,
+    buys: 0,
   });
 
   const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
@@ -262,6 +270,7 @@ export default function Demo(): JSX.Element {
     setPlayArea([]);
     setPlayer1Hand([]);
     setHasDrawn(false);
+    setPhase(phase + 1);
   }, [playArea, player1Hand]);
 
   // EFFECTS
@@ -344,6 +353,8 @@ export default function Demo(): JSX.Element {
                 player1Deck: player1Deck,
                 setPlayer1Deck: setPlayer1Deck,
                 setPlayArea: setPlayArea,
+                harvestArea: harvestArea,
+                setHarvestArea: setHarvestArea,
               }}
             >
               <Player1Area />
