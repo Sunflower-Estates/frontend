@@ -271,7 +271,7 @@ export default function Demo(): JSX.Element {
     setPlayer1Hand([]);
     setHasDrawn(false);
     setPhase(phase + 1);
-  }, [playArea, player1Hand]);
+  }, [phase, playArea, player1Hand]);
 
   // EFFECTS
   useEffect(() => {
