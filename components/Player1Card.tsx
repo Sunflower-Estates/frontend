@@ -72,5 +72,11 @@ export default function Player1Card({ data }: Player1CardPropsType) {
       }
     }
   };
-  return <Card data={data} handleClick={handleClick} />;
+  return (
+    <Card
+      data={data}
+      handleClick={handleClick}
+      highlighted={phase == PhaseType.PLANT && data.card.type == CropType}
+    />
+  );
 }
