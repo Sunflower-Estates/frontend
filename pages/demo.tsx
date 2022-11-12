@@ -396,6 +396,8 @@ export default function Demo(): JSX.Element {
 
   return (
     <>
+      <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
       <PhaseContext.Provider value={{ phase: phase, setPhase: setPhase }}>
         <ModalContext.Provider
           value={{
@@ -407,7 +409,7 @@ export default function Demo(): JSX.Element {
         >
           {modalVisible ? <CardModal card={modalCard} /> : null}
 
-          <Navbar />
+          <Navbar showConnect={true} />
           <main className="flex-grow bg-red-50">
             <div className="container mx-auto">
               <CropStoreContext.Provider
@@ -505,6 +507,8 @@ export default function Demo(): JSX.Element {
           </button>
         </div>
       </PhaseContext.Provider>
+      </RainbowKitProvider>
+    </WagmiConfig>
     </>
   );
 }
