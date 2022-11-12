@@ -9,8 +9,13 @@ import CardModal from "./CardModal";
 type CardProps = {
   data: CardDataType;
   handleClick: MouseEventHandler;
+  highlighted: boolean;
 };
-export default function Card({ data, handleClick }: CardProps): JSX.Element {
+export default function Card({
+  data,
+  handleClick,
+  highlighted,
+}: CardProps): JSX.Element {
   const { modalVisible, setModalVisible, modalCard, setModalCard } =
     useContext(ModalContext);
 
@@ -26,7 +31,13 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
       onContextMenu={handleRightClick}
       className="cursor-pointer"
     >
-      <Image src={`${data.card.cardImage}`} alt="" width={350} height={700} />
+      <Image
+        src={`${data.card.cardImage}`}
+        alt=""
+        width={350}
+        height={700}
+        className={highlighted ? "shadow-xl shadow-red-600" : ""}
+      />
       <div
         className="top-0 bg-red-500 rounded-full text-center ml-auto "
         style={{ width: "25px", height: "25px" }}

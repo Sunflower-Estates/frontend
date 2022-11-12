@@ -400,7 +400,9 @@ export default function Demo(): JSX.Element {
               >
                 <MainStore />
               </MainStoreContext.Provider>
-              <h2>Phase: {PhaseType[phase]}</h2>
+              <h2>
+                Phase: <span className="font-bold">{PhaseType[phase]}</span>
+              </h2>
               <div className="grid grid-cols-12">
                 <HarvestAreaContext.Provider
                   value={{
