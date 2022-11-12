@@ -347,7 +347,6 @@ export default function Demo(): JSX.Element {
       setHasDrawn(false);
     }
   }, [
-    cleanUp,
     harvestArea,
     hasDrawn,
     phase,
