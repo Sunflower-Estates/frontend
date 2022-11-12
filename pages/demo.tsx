@@ -46,6 +46,7 @@ import {
   Wheat,
   WishingWell,
 } from "../cards/Cards";
+import { ActionType, CardTypeType, CropType } from "../cards/CardTypes";
 import ActionStoreCard from "../components/ActionStoreCard";
 import Card from "../components/Card";
 import CardModal from "../components/CardModal";
@@ -63,6 +64,7 @@ import { CropStoreContext } from "../context/CropStoreContext";
 import { HarvestAreaContext } from "../context/HarvestAreaContext";
 import { MainStoreContext } from "../context/MainStoreContext";
 import { ModalContext } from "../context/ModalContext";
+import { PhaseContext } from "../context/PhaseContext";
 import { PlayAreaContext } from "../context/PlayAreaContext";
 import { Player1AreaContext } from "../context/Player1AreaContext";
 
@@ -72,6 +74,7 @@ export type PlayerType = {
   name: string;
   gold: number;
   actions: number;
+  buys: number;
   victory: number;
 };
 
@@ -82,9 +85,14 @@ export type CardDataType = {
 
 //  ENUMS
 
-enum PhaseType {
-  ACTION,
-  BUY,
+export enum PhaseType {
+  PREHARVEST, // 0. turn plants up right in plots
+  HARVEST, // 1. plots can be harvested to play area
+  ACTION, // 2. action cards played
+  PLANT, // 3. plant cards from hand to crop plots
+  BUY, // 4. buy and goes into discard pile
+  PRECLEANUP, // 5. any effects at end of turn
+  CLEANUP, // 6. all cards discards from play area and hand; then deal
 }
 
 // FUNCTIONS
@@ -149,15 +157,29 @@ export const getCardDataCount = (array: CardDataType[]): number => {
   return (array ?? []).reduce((a: number, b: CardDataType) => a + b.count, 0);
 };
 
+export const getCardDataCountOfType = (
+  array: CardDataType[],
+  cardType: CardTypeType
+): number => {
+  return (array ?? []).reduce((a: number, b: CardDataType) => {
+    if (b.card.type == cardType) {
+      return a + b.count;
+    } else {
+      return a;
+    }
+  }, 0);
+};
+
 export default function Demo(): JSX.Element {
   //  STATE
-  const [phase, setPhase] = useState<PhaseType>(PhaseType.ACTION);
+  const [phase, setPhase] = useState<PhaseType>(PhaseType.PREHARVEST);
 
   const [player1, setPlayer1] = useState<PlayerType>({
     name: "truemiller",
     gold: 0,
     actions: 0,
     victory: 0,
+    buys: 0,
   });
 
   const [player2, setPlayer2] = useState<PlayerType>({
@@ -165,6 +187,7 @@ export default function Demo(): JSX.Element {
     gold: 0,
     actions: 0,
     victory: 0,
+    buys: 0,
   });
 
   const [turnPlayer, setTurnPlayer] = useState<PlayerType>(player1);
@@ -255,105 +278,173 @@ export default function Demo(): JSX.Element {
     [player1Deck, player1Hand]
   );
 
-  const endTurn: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
-    setPlayer1Deck((prevPlayer1Deck) => {
-      return [...prevPlayer1Deck, ...playArea, ...player1Hand];
-    });
-    setPlayArea([]);
-    setPlayer1Hand([]);
-    setHasDrawn(false);
-  }, [playArea, player1Hand]);
-
   // EFFECTS
+
   useEffect(() => {
-    //  draw card on load
-    if (!hasDrawn) {
-      player1Draw(5);
-      setHasDrawn(true);
+    console.log("Running phases");
+
+    // PREHARVEST
+    if (phase == PhaseType.PREHARVEST) {
+      if (!hasDrawn) {
+        player1Draw(5);
+        setHasDrawn(true);
+      }
     }
-  }, [hasDrawn, player1Draw]);
+    //  HARVEST
+    else if (phase == PhaseType.HARVEST) {
+      if (getCardDataCount(harvestArea) > 0) {
+        //
+      }
+    }
+    // ACTION
+    else if (phase == PhaseType.ACTION) {
+      if (getCardDataCountOfType(player1Hand, ActionType) > 0) {
+        //
+      }
+    }
+    // PLANT
+    else if (phase == PhaseType.PLANT) {
+      if (getCardDataCountOfType(player1Hand, CropType) > 0) {
+        //
+      }
+    }
+    // BUY
+    else if (phase == PhaseType.BUY) {
+      if (player1.gold > 0) {
+        console.log(player1.gold);
+
+        //
+      }
+    }
+    // PRECLEANUP
+    else if (phase == PhaseType.PRECLEANUP) {
+    }
+    // CLEANUP
+    else if (phase == PhaseType.CLEANUP) {
+      setPlayer1Deck((prevPlayer1Deck) => {
+        return [...prevPlayer1Deck, ...playArea, ...player1Hand];
+      });
+      setPlayArea([]);
+      setPlayer1Hand([]);
+      setHasDrawn(false);
+    }
+  }, [
+    harvestArea,
+    hasDrawn,
+    phase,
+    playArea,
+    player1.gold,
+    player1Draw,
+    player1Hand,
+  ]);
 
   return (
     <>
-      <ModalContext.Provider
-        value={{
-          modalVisible: modalVisible,
-          setModalVisible: setModalVisible,
-          modalCard: modalCard,
-          setModalCard: setModalCard,
-        }}
-      >
-        {modalVisible ? <CardModal card={modalCard} /> : null}
+      <PhaseContext.Provider value={{ phase: phase, setPhase: setPhase }}>
+        <ModalContext.Provider
+          value={{
+            modalVisible: modalVisible,
+            setModalVisible: setModalVisible,
+            modalCard: modalCard,
+            setModalCard: setModalCard,
+          }}
+        >
+          {modalVisible ? <CardModal card={modalCard} /> : null}
 
-        <Navbar />
-        <main className="flex-grow bg-red-50">
-          <div className="container mx-auto">
-            <CropStoreContext.Provider
-              value={{
-                cropStore: cropStore,
-                setCropStore: setCropStore,
-                playArea: playArea,
-                setPlayArea: setPlayArea,
-                player1: player1,
-                setPlayer1: setPlayer1,
-              }}
-            >
-              <CropStore />
-            </CropStoreContext.Provider>
-            <HarvestAreaContext.Provider
-              value={{
-                harvestArea: harvestArea,
-                setHarvestArea: setHarvestArea,
-                playArea: playArea,
-                setPlayArea: setPlayArea,
-                player1: player1,
-                setPlayer1: setPlayer1,
-              }}
-            >
-              <HarvestArea></HarvestArea>
-            </HarvestAreaContext.Provider>
-            <MainStoreContext.Provider
-              value={{
-                warbondStore: warbondStore,
-                setWarbondStore: setWarbondStore,
-                actionStore: actionStore,
-                setActionStore: setActionStore,
-                player1: player1,
-                setPlayer1: setPlayer1,
-                playArea: playArea,
-                setPlayArea: setPlayArea,
-              }}
-            >
-              <MainStore />
-            </MainStoreContext.Provider>
-            <PlayAreaContext.Provider
-              value={{
-                playArea: playArea,
-                setPlayArea: setPlayArea,
-                setHarvestArea: setHarvestArea,
-              }}
-            >
-              <PlayArea />
-            </PlayAreaContext.Provider>
-            <Player1AreaContext.Provider
-              value={{
-                player1: player1,
-                setPlayer1: setPlayer1,
-                player1Hand: player1Hand,
-                setPlayer1Hand: setPlayer1Hand,
-                player1Deck: player1Deck,
-                setPlayer1Deck: setPlayer1Deck,
-                setPlayArea: setPlayArea,
-              }}
-            >
-              <Player1Area />
-            </Player1AreaContext.Provider>
-          </div>
-        </main>
-      </ModalContext.Provider>
-      <button className="px-5 py-3 bg-red-500" onClick={endTurn}>
-        End Turn
-      </button>
+          <Navbar />
+          <main className="flex-grow bg-red-50">
+            <div className="container mx-auto">
+              <CropStoreContext.Provider
+                value={{
+                  cropStore: cropStore,
+                  setCropStore: setCropStore,
+                  playArea: playArea,
+                  setPlayArea: setPlayArea,
+                  player1: player1,
+                  setPlayer1: setPlayer1,
+                }}
+              >
+                <CropStore />
+              </CropStoreContext.Provider>
+              <MainStoreContext.Provider
+                value={{
+                  warbondStore: warbondStore,
+                  setWarbondStore: setWarbondStore,
+                  actionStore: actionStore,
+                  setActionStore: setActionStore,
+                  player1: player1,
+                  setPlayer1: setPlayer1,
+                  playArea: playArea,
+                  setPlayArea: setPlayArea,
+                  setPlayer1Deck: setPlayer1Deck,
+                }}
+              >
+                <MainStore />
+              </MainStoreContext.Provider>
+              <h2>Phase: {PhaseType[phase]}</h2>
+              <div className="grid grid-cols-12">
+                <HarvestAreaContext.Provider
+                  value={{
+                    harvestArea: harvestArea,
+                    setHarvestArea: setHarvestArea,
+                    playArea: playArea,
+                    setPlayArea: setPlayArea,
+                    player1: player1,
+                    setPlayer1: setPlayer1,
+                  }}
+                >
+                  <HarvestArea></HarvestArea>
+                </HarvestAreaContext.Provider>
+                <PlayAreaContext.Provider
+                  value={{
+                    playArea: playArea,
+                    setPlayArea: setPlayArea,
+                    setHarvestArea: setHarvestArea,
+                  }}
+                >
+                  <PlayArea />
+                </PlayAreaContext.Provider>
+              </div>
+              <Player1AreaContext.Provider
+                value={{
+                  player1: player1,
+                  setPlayer1: setPlayer1,
+                  player1Hand: player1Hand,
+                  setPlayer1Hand: setPlayer1Hand,
+                  player1Deck: player1Deck,
+                  setPlayer1Deck: setPlayer1Deck,
+                  setPlayArea: setPlayArea,
+                  harvestArea: harvestArea,
+                  setHarvestArea: setHarvestArea,
+                }}
+              >
+                <Player1Area />
+              </Player1AreaContext.Provider>
+            </div>
+          </main>
+        </ModalContext.Provider>
+        <button className="btn" onClick={() => setPhase(0)}>
+          {PhaseType[0]}
+        </button>
+        <button className="btn" onClick={() => setPhase(1)}>
+          {PhaseType[1]}
+        </button>
+        <button className="btn" onClick={() => setPhase(2)}>
+          {PhaseType[2]}
+        </button>
+        <button className="btn" onClick={() => setPhase(3)}>
+          {PhaseType[3]}
+        </button>
+        <button className="btn" onClick={() => setPhase(4)}>
+          {PhaseType[4]}
+        </button>
+        <button className="btn" onClick={() => setPhase(5)}>
+          {PhaseType[5]}
+        </button>
+        <button className="btn" onClick={() => setPhase(6)}>
+          {PhaseType[6]}
+        </button>
+      </PhaseContext.Provider>
     </>
   );
 }

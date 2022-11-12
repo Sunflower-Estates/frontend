@@ -10,12 +10,8 @@ export function PlayArea() {
   const { playArea, setPlayArea, setHarvestArea } = playAreaContext;
 
   return (
-    <div
-      className="col-span-12 grid grid-cols-9"
-      style={{ minHeight: "230px" }}
-    >
-      <div className="col-span-2"></div>
-      <div className="col-span-5 bg-white border-2 p-2.5">
+    <div className="col-span-8 grid grid-cols-8" style={{ minHeight: "230px" }}>
+      <div className="col-span-full bg-white border-2 p-2.5">
         <h2 className="col-span-full">Play Area</h2>
         <div className="grid grid-cols-5 gap-2.5 p-5">
           {playArea.map((cardData) => {

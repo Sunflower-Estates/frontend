@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Player1AreaContext } from "../context/Player1AreaContext";
 import { CardDataType, getCardDataCount, PlayerType } from "../pages/demo";
 import Player1Card from "./Player1Card";
+import { Player1Hand } from "./Player1Hand";
 
 export function Player1Area() {
   const player1AreaContext = useContext(Player1AreaContext);
@@ -28,20 +29,5 @@ export function Player1Area() {
         <pre>{getCardDataCount(player1Deck)}</pre>
       </div>
     </div>
-  );
-}
-
-function Player1Hand() {
-  const player1AreaContext = useContext(Player1AreaContext);
-  if (!player1AreaContext) return null;
-  const { player1Hand, setPlayer1Hand, setPlayArea } = player1AreaContext;
-  return (
-    <>
-      {(player1Hand ?? [])?.map((data: CardDataType) => {
-        return (
-          <Player1Card key={"player1Hand-" + data.card.name} data={data} />
-        );
-      })}
-    </>
   );
 }

@@ -1,3 +1,4 @@
+import { CardClassType, GoblinClass } from "./CardClass";
 import {
   ActionType,
   CardTypeType,
@@ -7,9 +8,14 @@ import {
 } from "./CardTypes";
 
 export type CardType = {
+  victoryValue: number;
   name: string;
   goldCost: number;
   type: CardTypeType;
+  cardClass: CardClassType | null;
+  actionsGranted: number;
+  cardsGranted: number;
+  buysGranted: number;
   goldGranted: number;
   cardImage: string | null;
   iconImage: string | null;
@@ -17,17 +23,28 @@ export type CardType = {
 };
 
 class Card {
-  public name;
-  public goldCost;
-  public type;
-  public goldGranted;
-  public cardImage;
-  public iconImage;
-  public halfCardImage;
+  public name: string;
+  public goldCost: number;
+  public victoryValue: number;
+  public type: CardTypeType;
+  public cardClass: CardClassType | null;
+  public actionsGranted: number;
+  public cardsGranted: number;
+  public buysGranted: number;
+  public goldGranted: number;
+  public cardImage: string | null;
+  public iconImage: string | null;
+  public halfCardImage: string | null;
+
   constructor(
     name: string,
     goldCost: number,
+    victoryValue: number,
     type: CardTypeType,
+    cardClass: CardClassType | null,
+    actionsGranted: number,
+    cardsGranted: number,
+    buysGranted: number,
     goldGranted: number,
     cardImage: string | null,
     iconImage: string | null,
@@ -35,7 +52,12 @@ class Card {
   ) {
     this.name = name;
     this.goldCost = goldCost;
+    this.victoryValue = victoryValue;
     this.type = type;
+    this.cardClass = cardClass;
+    this.actionsGranted = actionsGranted;
+    this.cardsGranted = cardsGranted;
+    this.buysGranted = buysGranted;
     this.goldGranted = goldGranted;
     this.cardImage = cardImage;
     this.iconImage = iconImage;
@@ -43,11 +65,15 @@ class Card {
   }
 }
 
-//  Crops
 export const Sunflower: CardType = new Card(
   "Sunflower",
   0,
+  0,
   CropType,
+  null,
+  1,
+  0,
+  0,
   1,
   "/img/cards/Crop_Sunflower.png",
   "/img/icons/Store_Mini_Sunflower.png",
@@ -56,7 +82,12 @@ export const Sunflower: CardType = new Card(
 export const Potato: CardType = new Card(
   "Potato",
   1,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   2,
   "/img/cards/Crop_Potato.png",
   "/img/icons/Store_Mini_Potato.png",
@@ -65,7 +96,12 @@ export const Potato: CardType = new Card(
 export const Pumpkin: CardType = new Card(
   "Pumpkin",
   2,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   3,
   "/img/cards/Crop_Pumpkin.png",
   "/img/icons/Store_Mini_Pumpkin.png",
@@ -74,7 +110,12 @@ export const Pumpkin: CardType = new Card(
 export const Carrot: CardType = new Card(
   "Carrot",
   4,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   4,
   "/img/cards/Crop_Carrot.png",
   "/img/icons/Store_Mini_Carrot.png",
@@ -83,7 +124,12 @@ export const Carrot: CardType = new Card(
 export const Cabbage: CardType = new Card(
   "Cabbage",
   6,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   5,
   "/img/cards/Crop_Cabbage.png",
   "/img/icons/Store_Mini_Cabbage.png",
@@ -92,7 +138,12 @@ export const Cabbage: CardType = new Card(
 export const Beetroot: CardType = new Card(
   "Beetroot",
   8,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   6,
   "/img/cards/Crop_Beetroot.png",
   "/img/icons/Store_Mini_Beetroot.png",
@@ -101,7 +152,12 @@ export const Beetroot: CardType = new Card(
 export const Cauliflower: CardType = new Card(
   "Cauliflower",
   10,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   7,
   "/img/cards/Crop_Cauliflower.png",
   "/img/icons/Store_Mini_Cauliflower.png",
@@ -110,7 +166,12 @@ export const Cauliflower: CardType = new Card(
 export const Parsnip: CardType = new Card(
   "Parsnip",
   12,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   8,
   "/img/cards/Crop_Parsnip.png",
   "/img/icons/Store_Mini_Parsnip.png",
@@ -119,7 +180,12 @@ export const Parsnip: CardType = new Card(
 export const Wheat: CardType = new Card(
   "Wheat",
   14,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   9,
   "/img/cards/Crop_Wheat.png",
   "/img/icons/Store_Mini_Wheat.png",
@@ -128,18 +194,28 @@ export const Wheat: CardType = new Card(
 export const Radish: CardType = new Card(
   "Radish",
   14,
+  0,
   CropType,
+  null,
+  0,
+  0,
+  0,
   10,
   "/img/cards/Crop_Radish.png",
   "/img/icons/Store_Mini_Radish.png",
   "/img/half-cards/Store_Mini_Radish.png"
 );
-
+/////////////////////////////////////////////////////////////////////////////
 // Warbonds
 export const Ticket: CardType = new Card(
   "Ticket",
   10,
+  0,
   WarbondType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Warbond_Ticket.png",
   null,
@@ -148,7 +224,12 @@ export const Ticket: CardType = new Card(
 export const Tribute: CardType = new Card(
   "Tribute",
   0,
+  0,
   WarbondType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Warbond_Tribute.png",
   null,
@@ -157,7 +238,12 @@ export const Tribute: CardType = new Card(
 export const Patron: CardType = new Card(
   "Patron",
   20,
+  0,
   WarbondType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Warbond_Patron.png",
   null,
@@ -166,7 +252,12 @@ export const Patron: CardType = new Card(
 export const Treasury: CardType = new Card(
   "Treasury",
   0,
+  0,
   WarbondType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Warbond_Treasury.png",
   null,
@@ -177,7 +268,12 @@ export const Treasury: CardType = new Card(
 export const Fertilizer: CardType = new Card(
   "Fertilizer",
   2,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Fertilizer.png",
   null,
@@ -187,7 +283,12 @@ export const Fertilizer: CardType = new Card(
 export const GoblinBalloon: CardType = new Card(
   "Goblin Balloon",
   3,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Goblin_Balloon.png",
   null,
@@ -196,7 +297,12 @@ export const GoblinBalloon: CardType = new Card(
 export const HumanBlacksmith: CardType = new Card(
   "Human Blacksmith",
   6,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Human_Blacksmith.png",
   null,
@@ -205,7 +311,12 @@ export const HumanBlacksmith: CardType = new Card(
 export const GoblinBlacksmith: CardType = new Card(
   "Goblin Blacksmith",
   5,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Goblin_Blacksmith.png",
   null,
@@ -214,7 +325,12 @@ export const GoblinBlacksmith: CardType = new Card(
 export const GoblinCarry: CardType = new Card(
   "Goblin Carry",
   8,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Goblin_Carry.png",
   null,
@@ -223,7 +339,12 @@ export const GoblinCarry: CardType = new Card(
 export const GoblinFarmer: CardType = new Card(
   "Goblin Farmer",
   8,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Goblin_Farmer.png",
   null,
@@ -232,7 +353,12 @@ export const GoblinFarmer: CardType = new Card(
 export const HumanFarmer: CardType = new Card(
   "Human Farmer",
   5,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Human_Farmer.png",
   null,
@@ -241,7 +367,12 @@ export const HumanFarmer: CardType = new Card(
 export const Mine: CardType = new Card(
   "Mine",
   6,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Mine.png",
   null,
@@ -250,7 +381,12 @@ export const Mine: CardType = new Card(
 export const Resources: CardType = new Card(
   "Resources",
   6,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Resources.png",
   null,
@@ -259,7 +395,12 @@ export const Resources: CardType = new Card(
 export const RustyShovel: CardType = new Card(
   "Rusty Shovel",
   3,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Rusty_Shovel.png",
   null,
@@ -268,7 +409,12 @@ export const RustyShovel: CardType = new Card(
 export const IronShovel: CardType = new Card(
   "Iron Shovel",
   8,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Iron_Shovel.png",
   null,
@@ -277,8 +423,13 @@ export const IronShovel: CardType = new Card(
 export const Shop: CardType = new Card(
   "Shop",
   6,
-  ActionType,
   0,
+  ActionType,
+  null,
+  1,
+  0,
+  2,
+  2,
   "/img/cards/Base_Set_Shop.png",
   null,
   "/img/half-cards/Store_Mini_Shop.png"
@@ -286,7 +437,12 @@ export const Shop: CardType = new Card(
 export const WishingWell: CardType = new Card(
   "Wishing Well",
   6,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Wishing_Well.png",
   null,
@@ -295,7 +451,12 @@ export const WishingWell: CardType = new Card(
 export const TravelingSalesman: CardType = new Card(
   "Traveling Salesman",
   4,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Traveling_Salesman.png",
   null,
@@ -304,7 +465,12 @@ export const TravelingSalesman: CardType = new Card(
 export const Tailor: CardType = new Card(
   "Tailor",
   8,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Tailor.png",
   null,
@@ -313,7 +479,12 @@ export const Tailor: CardType = new Card(
 export const HumanWarrior: CardType = new Card(
   "Human Warrior",
   10,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Human_Warrior.png",
   null,
@@ -322,7 +493,12 @@ export const HumanWarrior: CardType = new Card(
 export const GoblinWarrior: CardType = new Card(
   "Goblin Warrior",
   10,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Goblin_Warrior.png",
   null,
@@ -331,7 +507,12 @@ export const GoblinWarrior: CardType = new Card(
 export const RadishPie: CardType = new Card(
   "Radish Pie",
   0,
+  0,
   ActionType,
+  null,
+  0,
+  0,
+  0,
   0,
   "/img/cards/Base_Set_Radish_Pie.png",
   null,
@@ -342,7 +523,12 @@ export const RadishPie: CardType = new Card(
 export const Tree: CardType = new Card(
   "Tree",
   2,
+  0,
   ResourceType,
+  null,
+  0,
+  0,
+  0,
   0,
   null,
   null,
@@ -351,7 +537,12 @@ export const Tree: CardType = new Card(
 export const Stone: CardType = new Card(
   "Stone",
   4,
+  0,
   ResourceType,
+  null,
+  0,
+  0,
+  0,
   0,
   null,
   null,
@@ -360,7 +551,12 @@ export const Stone: CardType = new Card(
 export const Iron: CardType = new Card(
   "Iron",
   6,
+  0,
   ResourceType,
+  null,
+  0,
+  0,
+  0,
   0,
   null,
   null,
@@ -369,7 +565,12 @@ export const Iron: CardType = new Card(
 export const Gold: CardType = new Card(
   "Gold",
   10,
+  0,
   ResourceType,
+  null,
+  0,
+  0,
+  0,
   0,
   null,
   null,

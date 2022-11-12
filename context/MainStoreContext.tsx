@@ -11,6 +11,7 @@ interface MainStoreContextInterface {
   setPlayer1: Function;
   playArea: CardDataType[];
   setPlayArea: Function;
+  setPlayer1Deck: Function;
 }
 export const MainStoreContext = createContext<MainStoreContextInterface | null>(
   null
