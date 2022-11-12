@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export default function Navbar(): JSX.Element {
+interface NavbarProps {
+  showConnect?: Boolean;
+}
+
+export default function Navbar(props:NavbarProps): JSX.Element {
+  const {showConnect} = props;
   return (
     <nav className="navbar">
       <Link href="/" className="flex">
@@ -15,7 +21,9 @@ export default function Navbar(): JSX.Element {
         </span>
         <span>Sunflower Estates</span>
       </Link>
+      { showConnect && <div className="div ml-auto"><ConnectButton /></div> }
       <div className="div ml-auto">
+        
         <Link href="/docs" className="nav-link">
           Docs
         </Link>
