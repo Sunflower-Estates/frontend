@@ -68,6 +68,43 @@ import { PhaseContext } from "../context/PhaseContext";
 import { PlayAreaContext } from "../context/PlayAreaContext";
 import { Player1AreaContext } from "../context/Player1AreaContext";
 
+// Rainbowkit
+import '@rainbow-me/rainbowkit/styles.css';
+
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import {
+  chain,
+  configureChains,
+  createClient,
+  WagmiConfig,
+} from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+
+
+
+const { chains, provider } = configureChains(
+  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+  [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+})
+
 // TYPES
 
 export type PlayerType = {
@@ -359,6 +396,8 @@ export default function Demo(): JSX.Element {
 
   return (
     <>
+      <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
       <PhaseContext.Provider value={{ phase: phase, setPhase: setPhase }}>
         <ModalContext.Provider
           value={{
@@ -370,7 +409,7 @@ export default function Demo(): JSX.Element {
         >
           {modalVisible ? <CardModal card={modalCard} /> : null}
 
-          <Navbar />
+          <Navbar showConnect={true} />
           <main className="flex-grow bg-red-50">
             <div className="container mx-auto">
               <CropStoreContext.Provider
@@ -468,6 +507,8 @@ export default function Demo(): JSX.Element {
           </button>
         </div>
       </PhaseContext.Provider>
+      </RainbowKitProvider>
+    </WagmiConfig>
     </>
   );
 }
