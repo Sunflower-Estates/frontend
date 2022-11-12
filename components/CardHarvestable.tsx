@@ -1,9 +1,10 @@
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { MouseEventHandler } from "react";
 
 import { ModalContext } from "../context/ModalContext";
-import { CardDataType } from "../pages/demo";
+import { PhaseContext } from "../context/PhaseContext";
+import { CardDataType, PhaseType } from "../pages/demo";
 import CardModal from "./CardModal";
 
 type CardHarvestableProps = {
@@ -15,9 +16,15 @@ export default function CardHarvestable({
   data,
   handleClick,
   isHarvestable,
-}: CardHarvestableProps): JSX.Element {
+}: CardHarvestableProps) {
   const { modalVisible, setModalVisible, modalCard, setModalCard } =
     useContext(ModalContext);
+
+  const phaseContext = useContext(PhaseContext);
+  if (!phaseContext) return null;
+  const { phase, setPhase } = phaseContext;
+
+  const isHarvestPhase = phase == PhaseType.HARVEST;
 
   function handleRightClick(e: any) {
     e.preventDefault();
@@ -29,14 +36,16 @@ export default function CardHarvestable({
     <div
       onClick={handleClick}
       onContextMenu={handleRightClick}
-      className="cursor-pointer"
+      className="cursor-pointer "
     >
       <Image
         src={`${data.card.cardImage}`}
         alt=""
         width={350}
         height={700}
-        className={`${isHarvestable ? "rotate-90" : ""}`}
+        className={`${isHarvestable ? "rotate-90" : ""} ${
+          isHarvestPhase ? "shadow-red-500 shadow-xl" : ""
+        }`}
       />
       <div
         className="top-0 bg-red-500 rounded-full text-center ml-auto "
