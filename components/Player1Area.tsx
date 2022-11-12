@@ -11,7 +11,7 @@ export function Player1Area() {
   const { player1, player1Hand, setPlayer1Hand, setPlayArea, player1Deck } =
     player1AreaContext;
   return (
-    <div className="grid grid-cols-12">
+    <div className="grid grid-cols-12" style={{ minHeight: "230px" }}>
       <div className="col-span-1"></div>
       <div className="bg-white border">Resources</div>
       <div className="bg-white border">Discard</div>

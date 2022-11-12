@@ -152,6 +152,22 @@ export const removeCardFromData = (
   }
 };
 
+export const addDataToData = (
+  array1: CardDataType[],
+  array2: CardDataType[]
+) => {
+  let _a1 = array1;
+  let _a2 = array2;
+
+  _a1.forEach((el1) => {
+    for (let x = 0; x < el1.count; x++) {
+      _a2 = addCardToData(el1.card, _a2);
+    }
+  });
+
+  return _a2;
+};
+
 export const getCardDataCount = (array: CardDataType[]): number => {
   // sum the counts from all card data
   return (array ?? []).reduce((a: number, b: CardDataType) => a + b.count, 0);
@@ -200,6 +216,7 @@ export default function Demo(): JSX.Element {
     { card: Sunflower, count: 7 },
     { card: Ticket, count: 3 },
   ]);
+
   const [player2Deck, setPlayer2Deck] = useState<CardDataType[]>([
     ...new Array(10).fill(null),
   ]);
@@ -266,7 +283,7 @@ export default function Demo(): JSX.Element {
       for (let x = 0; x < draws; x++) {
         // draw a single card or return
         let drawnCard: CardDataType = _.sample(_player1Deck)!;
-        if (!drawnCard) return;
+        if (!drawnCard) break;
         _player1Hand = addCardToData(drawnCard.card, _player1Hand);
         _player1Deck = removeCardFromData(drawnCard.card, _player1Deck);
       }
@@ -281,8 +298,6 @@ export default function Demo(): JSX.Element {
   // EFFECTS
 
   useEffect(() => {
-    console.log("Running phases");
-
     // PREHARVEST
     if (phase == PhaseType.PREHARVEST) {
       if (!hasDrawn) {
@@ -311,8 +326,6 @@ export default function Demo(): JSX.Element {
     // BUY
     else if (phase == PhaseType.BUY) {
       if (player1.gold > 0) {
-        console.log(player1.gold);
-
         //
       }
     }
@@ -321,19 +334,26 @@ export default function Demo(): JSX.Element {
     }
     // CLEANUP
     else if (phase == PhaseType.CLEANUP) {
-      setPlayer1Deck((prevPlayer1Deck) => {
-        return [...prevPlayer1Deck, ...playArea, ...player1Hand];
-      });
-      setPlayArea([]);
-      setPlayer1Hand([]);
+      if (player1Hand.length > 0 || playArea.length > 0) {
+        setPlayer1Deck((prevPlayer1Deck) => {
+          let newPlayer1Deck: CardDataType[] = [];
+          newPlayer1Deck = addDataToData(player1Hand, prevPlayer1Deck);
+          newPlayer1Deck = addDataToData(newPlayer1Deck, playArea);
+          return newPlayer1Deck;
+        });
+        setPlayer1Hand([]);
+        setPlayArea([]);
+      }
       setHasDrawn(false);
     }
   }, [
+    cleanUp,
     harvestArea,
     hasDrawn,
     phase,
     playArea,
     player1.gold,
+    player1Deck,
     player1Draw,
     player1Hand,
   ]);
@@ -423,27 +443,29 @@ export default function Demo(): JSX.Element {
             </div>
           </main>
         </ModalContext.Provider>
-        <button className="btn" onClick={() => setPhase(0)}>
-          {PhaseType[0]}
-        </button>
-        <button className="btn" onClick={() => setPhase(1)}>
-          {PhaseType[1]}
-        </button>
-        <button className="btn" onClick={() => setPhase(2)}>
-          {PhaseType[2]}
-        </button>
-        <button className="btn" onClick={() => setPhase(3)}>
-          {PhaseType[3]}
-        </button>
-        <button className="btn" onClick={() => setPhase(4)}>
-          {PhaseType[4]}
-        </button>
-        <button className="btn" onClick={() => setPhase(5)}>
-          {PhaseType[5]}
-        </button>
-        <button className="btn" onClick={() => setPhase(6)}>
-          {PhaseType[6]}
-        </button>
+        <div className="w-full flex justify-center">
+          <button className="btn" onClick={() => setPhase(0)}>
+            {PhaseType[0]}
+          </button>
+          <button className="btn" onClick={() => setPhase(1)}>
+            {PhaseType[1]}
+          </button>
+          <button className="btn" onClick={() => setPhase(2)}>
+            {PhaseType[2]}
+          </button>
+          <button className="btn" onClick={() => setPhase(3)}>
+            {PhaseType[3]}
+          </button>
+          <button className="btn" onClick={() => setPhase(4)}>
+            {PhaseType[4]}
+          </button>
+          <button className="btn" onClick={() => setPhase(5)}>
+            {PhaseType[5]}
+          </button>
+          <button className="btn" onClick={() => setPhase(6)}>
+            {PhaseType[6]}
+          </button>
+        </div>
       </PhaseContext.Provider>
     </>
   );
