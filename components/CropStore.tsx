@@ -9,6 +9,7 @@ import {
   removeCardFromData,
 } from "../pages/demo";
 import Card from "./Card";
+import CardIcon from "./CardIcon";
 
 export function CropStore() {
   const cropStoreContext = useContext(CropStoreContext);
@@ -42,17 +43,20 @@ export function CropStore() {
   }
 
   return (
-    <div className="grid grid-cols-10 gap-2.5 mb-5">
+    <div
+      className="grid grid-cols-10 gap-2.5 mb-5"
+      style={{ minHeight: "100px" }}
+    >
       <div className="col-span-full">
         <h2>Crop Store</h2>
       </div>
       {cropStore.map((cardData) => {
         return (
-          <Card
+          <CardIcon
             key={"cropStore-" + cardData.card.name}
             data={cardData}
             handleClick={() => handleCardClick(cardData.card)}
-          ></Card>
+          ></CardIcon>
         );
       }, [])}
     </div>

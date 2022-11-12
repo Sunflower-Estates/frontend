@@ -9,8 +9,13 @@ import CardModal from "./CardModal";
 type CardProps = {
   data: CardDataType;
   handleClick: MouseEventHandler;
+  highlighted: boolean;
 };
-export default function Card({ data, handleClick }: CardProps): JSX.Element {
+export default function Card({
+  data,
+  handleClick,
+  highlighted,
+}: CardProps): JSX.Element {
   const { modalVisible, setModalVisible, modalCard, setModalCard } =
     useContext(ModalContext);
 
@@ -21,32 +26,24 @@ export default function Card({ data, handleClick }: CardProps): JSX.Element {
   }
 
   return (
-    <div onClick={handleClick} onContextMenu={handleRightClick} className="">
-      <Image src={`${data.card.image}`} alt="" width={350} height={700} />
+    <div
+      onClick={handleClick}
+      onContextMenu={handleRightClick}
+      className="cursor-pointer"
+    >
+      <Image
+        src={`${data.card.cardImage}`}
+        alt=""
+        width={350}
+        height={700}
+        className={highlighted ? "shadow-xl shadow-red-600" : ""}
+      />
       <div
         className="top-0 bg-red-500 rounded-full text-center ml-auto "
         style={{ width: "25px", height: "25px" }}
       >
         {data.count == Infinity ? "∞" : data.count}
       </div>
-      {/* <div>{data.card.name}</div>
-      <div>
-        <div
-          className="ml-auto bg-yellow-500 rounded-full text-center"
-          style={{ width: "25px", height: "25px" }}
-        >
-          {data.card.goldCost}
-        </div>
-      </div>
-      <div className="h-full flex flex-col">
-        <div
-          className="bg-red-500 rounded-full text-center mt-auto flex width"
-          style={{ width: "25px", height: "25px" }}
-        >
-          {data.count}
-        </div>
-      </div>
-      <div></div> */}
     </div>
   );
 }

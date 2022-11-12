@@ -16,14 +16,7 @@ export function PlayAreaCard({ data }: PlayAreaCardPropsType) {
 
   function handleClick(e: any) {
     e.preventDefault();
-    if (data.card.type == CropType) {
-      setPlayArea((prevPlayArea: CardDataType[]) => {
-        return removeCardFromData(data.card, prevPlayArea);
-      });
-      setHarvestArea((prevHarvestArea: CardDataType[]) => {
-        return addCardToData(data.card, prevHarvestArea);
-      });
-    }
+    // NO ACTION CARDS ARE CLICKED
   }
   return (
     <>

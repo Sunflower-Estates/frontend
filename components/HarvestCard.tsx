@@ -8,11 +8,13 @@ import {
   removeCardFromData,
 } from "../pages/demo";
 import Card from "./Card";
+import CardHarvestable from "./CardHarvestable";
 
 type HarvestCardPropsType = {
   data: CardDataType;
+  isHarvestable: boolean;
 };
-export function HarvestCard({ data }: HarvestCardPropsType) {
+export function HarvestCard({ data, isHarvestable }: HarvestCardPropsType) {
   const harvestAreaContext = useContext(HarvestAreaContext);
   if (!harvestAreaContext) return null;
   const { setHarvestArea, setPlayArea, setPlayer1 } = harvestAreaContext;
@@ -41,7 +43,11 @@ export function HarvestCard({ data }: HarvestCardPropsType) {
 
   return (
     <>
-      <Card handleClick={handleClick} data={data} />
+      <CardHarvestable
+        handleClick={handleClick}
+        data={data}
+        isHarvestable={false}
+      />
     </>
   );
 }

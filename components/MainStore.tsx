@@ -7,9 +7,9 @@ import WarbondStoreCard from "./WarbondStoreCard";
 
 export function MainStore() {
   return (
-    <div className="grid grid-cols-10 bg-red-50 gap-5 mb-5">
-      <div className="col-span-8">
-        <div className="grid grid-cols-10 bg-red-100 gap-2.5">
+    <div className="grid grid-cols-10 mb-5">
+      <div className="col-span-12">
+        <div className="grid grid-cols-10 ">
           <WarbondStore />
           <ActionStore />
         </div>
@@ -21,9 +21,9 @@ export function MainStore() {
 function WarbondStore() {
   const warbondStoreContext = useContext(MainStoreContext);
   if (!warbondStoreContext) return null;
-  const { warbondStore, setWarbondStore } = warbondStoreContext;
+  const { warbondStore } = warbondStoreContext;
   return (
-    <div className="col-span-2 grid grid-cols-2 bg-red-100 gap-2.5">
+    <div className="col-span-2 grid grid-cols-2 bg-white border gap-2.5">
       <h2 className="col-span-full">Warbond Store</h2>
       {warbondStore.map((data: CardDataType) => (
         <WarbondStoreCard key={"sideStore-" + data.card.name} data={data} />
@@ -35,9 +35,9 @@ function WarbondStore() {
 function ActionStore() {
   const mainStoreContext = useContext(MainStoreContext);
   if (!mainStoreContext) return null;
-  const { actionStore, setActionStore } = mainStoreContext;
+  const { actionStore } = mainStoreContext;
   return (
-    <div className="col-span-8 grid grid-cols-10 gap-2.5">
+    <div className="col-span-8 grid grid-cols-9 gap-2.5 bg-white border">
       <h2 className="col-span-full">Action Store</h2>
       {actionStore.map((data: CardDataType) => (
         <ActionStoreCard key={"store-" + data.card.name} data={data} />

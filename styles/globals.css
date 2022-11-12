@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Play", sans-serif;
 }
 
 h1 {

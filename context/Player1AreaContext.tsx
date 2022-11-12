@@ -10,6 +10,8 @@ interface Player1AreaContextInterface {
   player1Deck: CardDataType[];
   setPlayer1Deck: Function;
   setPlayArea: Function;
+  harvestArea: CardDataType[];
+  setHarvestArea: Function;
 }
 
 export const Player1AreaContext =
