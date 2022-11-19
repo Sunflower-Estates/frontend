@@ -1,6 +1,11 @@
+// Rainbowkit
+import "@rainbow-me/rainbowkit/styles.css";
+
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import _ from "lodash";
 import {
   createContext,
+  createElement,
   Dispatch,
   MouseEvent,
   MouseEventHandler,
@@ -10,6 +15,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 
 import {
   Beetroot,
@@ -68,42 +76,24 @@ import { PhaseContext } from "../context/PhaseContext";
 import { PlayAreaContext } from "../context/PlayAreaContext";
 import { Player1AreaContext } from "../context/Player1AreaContext";
 
-// Rainbowkit
-import '@rainbow-me/rainbowkit/styles.css';
-
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
-import {
-  chain,
-  configureChains,
-  createClient,
-  WagmiConfig,
-} from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
-
-
-
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-    publicProvider()
+    publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  chains
+  appName: "My RainbowKit App",
+  chains,
 });
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider
-})
+  provider,
+});
 
 // TYPES
 
@@ -328,6 +318,8 @@ export default function Demo(): JSX.Element {
       //  update state
       setPlayer1Hand(_player1Hand);
       setPlayer1Deck(_player1Deck);
+
+      // animate
     },
     [player1Deck, player1Hand]
   );
@@ -397,118 +389,118 @@ export default function Demo(): JSX.Element {
   return (
     <>
       <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-      <PhaseContext.Provider value={{ phase: phase, setPhase: setPhase }}>
-        <ModalContext.Provider
-          value={{
-            modalVisible: modalVisible,
-            setModalVisible: setModalVisible,
-            modalCard: modalCard,
-            setModalCard: setModalCard,
-          }}
-        >
-          {modalVisible ? <CardModal card={modalCard} /> : null}
+        <RainbowKitProvider chains={chains}>
+          <PhaseContext.Provider value={{ phase: phase, setPhase: setPhase }}>
+            <ModalContext.Provider
+              value={{
+                modalVisible: modalVisible,
+                setModalVisible: setModalVisible,
+                modalCard: modalCard,
+                setModalCard: setModalCard,
+              }}
+            >
+              {modalVisible ? <CardModal card={modalCard} /> : null}
 
-          <Navbar showConnect={true} />
-          <main className="flex-grow bg-red-50">
-            <div className="container mx-auto">
-              <CropStoreContext.Provider
-                value={{
-                  cropStore: cropStore,
-                  setCropStore: setCropStore,
-                  playArea: playArea,
-                  setPlayArea: setPlayArea,
-                  player1: player1,
-                  setPlayer1: setPlayer1,
-                }}
-              >
-                <CropStore />
-              </CropStoreContext.Provider>
-              <MainStoreContext.Provider
-                value={{
-                  warbondStore: warbondStore,
-                  setWarbondStore: setWarbondStore,
-                  actionStore: actionStore,
-                  setActionStore: setActionStore,
-                  player1: player1,
-                  setPlayer1: setPlayer1,
-                  playArea: playArea,
-                  setPlayArea: setPlayArea,
-                  setPlayer1Deck: setPlayer1Deck,
-                }}
-              >
-                <MainStore />
-              </MainStoreContext.Provider>
-              <h2>
-                Phase: <span className="font-bold">{PhaseType[phase]}</span>
-              </h2>
-              <div className="grid grid-cols-12">
-                <HarvestAreaContext.Provider
-                  value={{
-                    harvestArea: harvestArea,
-                    setHarvestArea: setHarvestArea,
-                    playArea: playArea,
-                    setPlayArea: setPlayArea,
-                    player1: player1,
-                    setPlayer1: setPlayer1,
-                  }}
-                >
-                  <HarvestArea></HarvestArea>
-                </HarvestAreaContext.Provider>
-                <PlayAreaContext.Provider
-                  value={{
-                    playArea: playArea,
-                    setPlayArea: setPlayArea,
-                    setHarvestArea: setHarvestArea,
-                  }}
-                >
-                  <PlayArea />
-                </PlayAreaContext.Provider>
-              </div>
-              <Player1AreaContext.Provider
-                value={{
-                  player1: player1,
-                  setPlayer1: setPlayer1,
-                  player1Hand: player1Hand,
-                  setPlayer1Hand: setPlayer1Hand,
-                  player1Deck: player1Deck,
-                  setPlayer1Deck: setPlayer1Deck,
-                  setPlayArea: setPlayArea,
-                  harvestArea: harvestArea,
-                  setHarvestArea: setHarvestArea,
-                }}
-              >
-                <Player1Area />
-              </Player1AreaContext.Provider>
+              <Navbar showConnect={true} />
+              <main className="flex-grow bg-red-50">
+                <div className="flex flex-col container mx-auto">
+                  <CropStoreContext.Provider
+                    value={{
+                      cropStore: cropStore,
+                      setCropStore: setCropStore,
+                      playArea: playArea,
+                      setPlayArea: setPlayArea,
+                      player1: player1,
+                      setPlayer1: setPlayer1,
+                    }}
+                  >
+                    <CropStore />
+                  </CropStoreContext.Provider>
+                  <MainStoreContext.Provider
+                    value={{
+                      warbondStore: warbondStore,
+                      setWarbondStore: setWarbondStore,
+                      actionStore: actionStore,
+                      setActionStore: setActionStore,
+                      player1: player1,
+                      setPlayer1: setPlayer1,
+                      playArea: playArea,
+                      setPlayArea: setPlayArea,
+                      setPlayer1Deck: setPlayer1Deck,
+                    }}
+                  >
+                    <MainStore />
+                  </MainStoreContext.Provider>
+                  <h2>
+                    Phase: <span className="font-bold">{PhaseType[phase]}</span>
+                  </h2>
+                  <div className="flex">
+                    <HarvestAreaContext.Provider
+                      value={{
+                        harvestArea: harvestArea,
+                        setHarvestArea: setHarvestArea,
+                        playArea: playArea,
+                        setPlayArea: setPlayArea,
+                        player1: player1,
+                        setPlayer1: setPlayer1,
+                      }}
+                    >
+                      <HarvestArea></HarvestArea>
+                    </HarvestAreaContext.Provider>
+                    <PlayAreaContext.Provider
+                      value={{
+                        playArea: playArea,
+                        setPlayArea: setPlayArea,
+                        setHarvestArea: setHarvestArea,
+                      }}
+                    >
+                      <PlayArea />
+                    </PlayAreaContext.Provider>
+                  </div>
+                  <Player1AreaContext.Provider
+                    value={{
+                      player1: player1,
+                      setPlayer1: setPlayer1,
+                      player1Hand: player1Hand,
+                      setPlayer1Hand: setPlayer1Hand,
+                      player1Deck: player1Deck,
+                      setPlayer1Deck: setPlayer1Deck,
+                      setPlayArea: setPlayArea,
+                      harvestArea: harvestArea,
+                      setHarvestArea: setHarvestArea,
+                    }}
+                  >
+                    <Player1Area />
+                  </Player1AreaContext.Provider>
+                </div>
+              </main>
+            </ModalContext.Provider>
+            <div className="w-full flex justify-center">
+              <button className="btn" onClick={() => setPhase(0)}>
+                {PhaseType[0]}
+              </button>
+              <button className="btn" onClick={() => setPhase(1)}>
+                {PhaseType[1]}
+              </button>
+              <button className="btn" onClick={() => setPhase(2)}>
+                {PhaseType[2]}
+              </button>
+              <button className="btn" onClick={() => setPhase(3)}>
+                {PhaseType[3]}
+              </button>
+              <button className="btn" onClick={() => setPhase(4)}>
+                {PhaseType[4]}
+              </button>
+              <button className="btn" onClick={() => setPhase(5)}>
+                {PhaseType[5]}
+              </button>
+              <button className="btn" onClick={() => setPhase(6)}>
+                {PhaseType[6]}
+              </button>
             </div>
-          </main>
-        </ModalContext.Provider>
-        <div className="w-full flex justify-center">
-          <button className="btn" onClick={() => setPhase(0)}>
-            {PhaseType[0]}
-          </button>
-          <button className="btn" onClick={() => setPhase(1)}>
-            {PhaseType[1]}
-          </button>
-          <button className="btn" onClick={() => setPhase(2)}>
-            {PhaseType[2]}
-          </button>
-          <button className="btn" onClick={() => setPhase(3)}>
-            {PhaseType[3]}
-          </button>
-          <button className="btn" onClick={() => setPhase(4)}>
-            {PhaseType[4]}
-          </button>
-          <button className="btn" onClick={() => setPhase(5)}>
-            {PhaseType[5]}
-          </button>
-          <button className="btn" onClick={() => setPhase(6)}>
-            {PhaseType[6]}
-          </button>
-        </div>
-      </PhaseContext.Provider>
-      </RainbowKitProvider>
-    </WagmiConfig>
+          </PhaseContext.Provider>
+        </RainbowKitProvider>
+      </WagmiConfig>
     </>
   );
 }

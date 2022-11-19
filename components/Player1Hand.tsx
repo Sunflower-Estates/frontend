@@ -9,12 +9,12 @@ export function Player1Hand() {
   if (!player1AreaContext) return null;
   const { player1Hand, setPlayer1Hand, setPlayArea } = player1AreaContext;
   return (
-    <>
+    <div className="flex" style={{ width: 1000 }}>
       {(player1Hand ?? [])?.map((data: CardDataType) => {
         return (
           <Player1Card key={"player1Hand-" + data.card.name} data={data} />
         );
       })}
-    </>
+    </div>
   );
 }

@@ -28,22 +28,23 @@ export default function CardIcon({
       onClick={handleClick}
       onContextMenu={handleRightClick}
       className="cursor-pointer"
+      style={{ minWidth: 100, minHeight: 100 }}
     >
-      <Image src={`${data.card.iconImage}`} alt="" width={150} height={150} />
-      <div className="flex">
+      <div className="absolute" style={{ minWidth: 100, minHeight: 100 }}>
         <div
-          className="top-0 bg-yellow-500 rounded-full text-center mr-auto "
+          className="absolute left-0 bottom-0 bg-yellow-500 rounded-full text-center"
           style={{ width: "25px", height: "25px" }}
         >
           {data.card.goldCost}
         </div>
         <div
-          className="top-0 bg-red-500 rounded-full text-center ml-auto "
+          className="absolute right-0 bottom-0 bg-red-500 rounded-full text-center"
           style={{ width: "25px", height: "25px" }}
         >
           {data.count == Infinity ? "∞" : data.count}
         </div>
       </div>
+      <Image src={`${data.card.iconImage}`} alt="" width={100} height={100} />
     </div>
   );
 }

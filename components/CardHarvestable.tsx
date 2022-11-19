@@ -36,23 +36,24 @@ export default function CardHarvestable({
     <div
       onClick={handleClick}
       onContextMenu={handleRightClick}
-      className="cursor-pointer "
+      className="cursor-pointer relative"
+      style={{ minWidth: 125, minHeight: 175 }}
     >
+      <div
+        className="absolute bottom-0  bg-red-500 rounded-full text-center"
+        style={{ width: 25, height: 25 }}
+      >
+        {data.count == Infinity ? "∞" : data.count}
+      </div>
       <Image
         src={`${data.card.cardImage}`}
         alt=""
-        width={350}
-        height={700}
+        width={125}
+        height={175}
         className={`${isHarvestable ? "rotate-90" : ""} ${
           isHarvestPhase ? "shadow-red-500 shadow-xl" : ""
         }`}
       />
-      <div
-        className="top-0 bg-red-500 rounded-full text-center ml-auto "
-        style={{ width: "25px", height: "25px" }}
-      >
-        {data.count == Infinity ? "∞" : data.count}
-      </div>
     </div>
   );
 }

@@ -29,21 +29,22 @@ export default function Card({
     <div
       onClick={handleClick}
       onContextMenu={handleRightClick}
-      className="cursor-pointer"
+      className="cursor-pointer relative"
+      style={{ width: 125, height: 175 }}
     >
-      <Image
-        src={`${data.card.cardImage}`}
-        alt=""
-        width={350}
-        height={700}
-        className={highlighted ? "shadow-xl shadow-red-600" : ""}
-      />
       <div
-        className="top-0 bg-red-500 rounded-full text-center ml-auto "
+        className="absolute top-0 right-0 bg-red-500 rounded-full text-center ml-auto "
         style={{ width: "25px", height: "25px" }}
       >
         {data.count == Infinity ? "∞" : data.count}
       </div>
+      <Image
+        src={`${data.card.cardImage}`}
+        alt=""
+        width={125}
+        height={175}
+        className={highlighted ? "shadow-xl shadow-red-600" : ""}
+      />
     </div>
   );
 }

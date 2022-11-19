@@ -28,21 +28,21 @@ export default function CardHalf({ data, handleClick }: CardProps) {
       onContextMenu={handleRightClick}
       className="cursor-pointer"
     >
-      <img src={`${data.card.halfCardImage}`} alt="" width={350} height={350} />
-      <div className="flex">
+      <div className="absolute" style={{ minWidth: 125, minHeight: 100 }}>
         <div
-          className="top-0 bg-yellow-500 rounded-full text-center mr-auto "
+          className="absolute left-0 bottom-0 bg-yellow-500 rounded-full text-center"
           style={{ width: "25px", height: "25px" }}
         >
           {data.card.goldCost}
         </div>
         <div
-          className="top-0 bg-red-500 rounded-full text-center ml-auto "
+          className="absolute right-0 bottom-0 bg-red-500 rounded-full text-center"
           style={{ width: "25px", height: "25px" }}
         >
           {data.count == Infinity ? "∞" : data.count}
         </div>
       </div>
+      <img src={`${data.card.halfCardImage}`} alt="" width={125} height={100} />
     </div>
   );
 }

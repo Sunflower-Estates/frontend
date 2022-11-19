@@ -42,12 +42,10 @@ export function HarvestCard({ data, isHarvestable }: HarvestCardPropsType) {
   }
 
   return (
-    <>
-      <CardHarvestable
-        handleClick={handleClick}
-        data={data}
-        isHarvestable={false}
-      />
-    </>
+    <CardHarvestable
+      handleClick={handleClick}
+      data={data}
+      isHarvestable={false}
+    />
   );
 }
