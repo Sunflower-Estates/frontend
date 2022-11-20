@@ -2,6 +2,7 @@ import { CardType } from "../card-data/Cards";
 import { CardTypeType } from "../card-data/CardTypes";
 import { CardDataType } from "../pages/demo";
 
+// ADDS A CARD TO A DATA SET
 export const addCardToData = (
   card: CardType,
   array: CardDataType[]
@@ -23,6 +24,7 @@ export const addCardToData = (
   }
 };
 
+// REMOVES A CARD FROM A DATASET
 export const removeCardFromData = (
   card: CardType,
   array: CardDataType[]
@@ -58,6 +60,7 @@ export const removeCardFromData = (
   }
 };
 
+// ADD A DATASET TO A DATASET
 export const addDataToData = (
   array1: CardDataType[],
   array2: CardDataType[]
@@ -74,11 +77,13 @@ export const addDataToData = (
   return _a2;
 };
 
+//  COUNT CARDS IN A DATASET
 export const getCardDataCount = (array: CardDataType[]): number => {
   // sum the counts from all card data
   return (array ?? []).reduce((a: number, b: CardDataType) => a + b.count, 0);
 };
 
+// COUNT CARDS OF A GIVEN DATA TYPE IN A DATASET
 export const getCardDataCountOfType = (
   array: CardDataType[],
   cardType: CardTypeType
