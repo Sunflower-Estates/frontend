@@ -21,9 +21,12 @@ export default function CardModal({ card }: CardModalPropsType): JSX.Element {
     if (card) {
       new VanillaTilt(card, {
         max: 50,
-        "max-glare": 10,
-        speed: 100,
+        glare: true,
+        "max-glare": 1,
+        speed: 1000,
         perspective: 700,
+        "full-page-listening": true,
+        transition: true,
       });
     }
   }, []);
@@ -47,6 +50,8 @@ export default function CardModal({ card }: CardModalPropsType): JSX.Element {
               width={350}
               height={700}
               className="card"
+              data-tilt
+              data-tilt-full-page-listening
             ></img>
           </div>
         </div>
