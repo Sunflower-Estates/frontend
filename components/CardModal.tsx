@@ -17,7 +17,7 @@ export default function CardModal({ card }: CardModalPropsType): JSX.Element {
   };
 
   useEffect(() => {
-    const card = document.querySelector("#dialog-card");
+    const card: HTMLElement = document.querySelector("#dialog-card")!;
     if (card) {
       new VanillaTilt(card, {
         max: 50,
