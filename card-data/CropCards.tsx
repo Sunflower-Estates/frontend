@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+import Card from "../components/Cards/Card";
 import { CardType } from "./Cards";
 import { CropType } from "./CardTypes";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useContext } from "react";
 
-import { CardType } from "../cards/Cards";
+import { CardType } from "../card-data/Cards";
 import { ModalContext } from "../context/ModalContext";
 
 type CardModalPropsType = {

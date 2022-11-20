@@ -1,10 +1,10 @@
 import { wrap } from "module";
 import { useContext } from "react";
 
-import { MainStoreContext } from "../context/MainStoreContext";
-import { CardDataType } from "../pages/demo";
-import ActionStoreCard from "./ActionStoreCard";
-import WarbondStoreCard from "./WarbondStoreCard";
+import { MainStoreContext } from "../../context/MainStoreContext";
+import { CardDataType } from "../../pages/demo";
+import ActionStoreCard from "../CardWrappers/ActionStoreCard";
+import WarbondStoreCard from "../CardWrappers/WarbondStoreCard";
 
 export function MainStore() {
   return (

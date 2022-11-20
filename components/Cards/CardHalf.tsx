@@ -2,9 +2,8 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import { MouseEventHandler } from "react";
 
-import { ModalContext } from "../context/ModalContext";
-import { CardDataType } from "../pages/demo";
-import CardModal from "./CardModal";
+import { ModalContext } from "../../context/ModalContext";
+import { CardDataType } from "../../pages/demo";
 
 type CardProps = {
   data: CardDataType;
@@ -13,8 +12,7 @@ type CardProps = {
 export default function CardHalf({ data, handleClick }: CardProps) {
   const modalContext = useContext(ModalContext);
   if (!modalContext) return null;
-  const { modalVisible, setModalVisible, modalCard, setModalCard } =
-    modalContext;
+  const { setModalVisible, setModalCard } = modalContext;
 
   function handleRightClick(e: any) {
     e.preventDefault();
@@ -42,7 +40,12 @@ export default function CardHalf({ data, handleClick }: CardProps) {
           {data.count == Infinity ? "∞" : data.count}
         </div>
       </div>
-      <img src={`${data.card.halfCardImage}`} alt="" width={125} height={100} />
+      <Image
+        src={`${data.card.halfCardImage}`}
+        alt=""
+        width={125}
+        height={100}
+      />
     </div>
   );
 }

@@ -1,15 +1,15 @@
 import { MouseEventHandler, useContext } from "react";
 
-import { CardType } from "../cards/Cards";
-import { CropStoreContext } from "../context/CropStoreContext";
+import { CardType } from "../../card-data/Cards";
+import { CropStoreContext } from "../../context/CropStoreContext";
 import {
   addCardToData,
   CardDataType,
   PlayerType,
   removeCardFromData,
-} from "../pages/demo";
-import Card from "./Card";
-import CardIcon from "./CardIcon";
+} from "../../pages/demo";
+import Card from "../Cards/Card";
+import CardIcon from "../Cards/CardIcon";
 
 export function CropStore() {
   const cropStoreContext = useContext(CropStoreContext);

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { CardType, Sunflower } from "../cards/Cards";
+import { CardType, Sunflower } from "../card-data/Cards";
 
 //  CONTEXT
 export const ModalContext = createContext({

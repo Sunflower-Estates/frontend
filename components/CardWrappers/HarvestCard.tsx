@@ -1,14 +1,14 @@
 import { useContext } from "react";
 
-import { HarvestAreaContext } from "../context/HarvestAreaContext";
+import { HarvestAreaContext } from "../../context/HarvestAreaContext";
 import {
   addCardToData,
   CardDataType,
   PlayerType,
   removeCardFromData,
-} from "../pages/demo";
-import Card from "./Card";
-import CardHarvestable from "./CardHarvestable";
+} from "../../pages/demo";
+import Card from "../Cards/Card";
+import CardHarvestable from "../Cards/CardHarvestable";
 
 type HarvestCardPropsType = {
   data: CardDataType;

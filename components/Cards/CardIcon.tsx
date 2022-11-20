@@ -2,9 +2,8 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import { MouseEventHandler } from "react";
 
-import { ModalContext } from "../context/ModalContext";
-import { CardDataType } from "../pages/demo";
-import CardModal from "./CardModal";
+import { ModalContext } from "../../context/ModalContext";
+import { CardDataType } from "../../pages/demo";
 
 type CardProps = {
   data: CardDataType;

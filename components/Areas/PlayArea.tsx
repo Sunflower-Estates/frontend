@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import { PlayAreaContext } from "../context/PlayAreaContext";
-import Card from "./Card";
-import { PlayAreaCard } from "./PlayAreaCard";
+import { PlayAreaContext } from "../../context/PlayAreaContext";
+import Card from "../Cards/Card";
+import { PlayAreaCard } from "../CardWrappers/PlayAreaCard";
 
 export function PlayArea() {
   const playAreaContext = useContext(PlayAreaContext);

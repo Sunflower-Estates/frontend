@@ -1,9 +1,13 @@
 import { useContext } from "react";
 
-import { CropType } from "../cards/CardTypes";
-import { PlayAreaContext } from "../context/PlayAreaContext";
-import { addCardToData, CardDataType, removeCardFromData } from "../pages/demo";
-import Card from "./Card";
+import { CropType } from "../../card-data/CardTypes";
+import { PlayAreaContext } from "../../context/PlayAreaContext";
+import {
+  addCardToData,
+  CardDataType,
+  removeCardFromData,
+} from "../../pages/demo";
+import Card from "../Cards/Card";
 
 type PlayAreaCardPropsType = {
   data: CardDataType;
@@ -20,7 +24,7 @@ export function PlayAreaCard({ data }: PlayAreaCardPropsType) {
   }
   return (
     <>
-      <Card data={data} handleClick={handleClick}></Card>
+      <Card data={data} handleClick={handleClick} highlighted={false}></Card>
     </>
   );
 }

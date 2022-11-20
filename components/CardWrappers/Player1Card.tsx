@@ -1,8 +1,13 @@
-import { MouseEvent, MouseEventHandler, useContext } from "react";
+import {
+  createElement,
+  MouseEvent,
+  MouseEventHandler,
+  useContext,
+} from "react";
 
-import { ActionType, CropType } from "../cards/CardTypes";
-import { PhaseContext } from "../context/PhaseContext";
-import { Player1AreaContext } from "../context/Player1AreaContext";
+import { ActionType, CropType } from "../../card-data/CardTypes";
+import { PhaseContext } from "../../context/PhaseContext";
+import { Player1AreaContext } from "../../context/Player1AreaContext";
 import {
   addCardToData,
   CardDataType,
@@ -10,8 +15,8 @@ import {
   PhaseType,
   PlayerType,
   removeCardFromData,
-} from "../pages/demo";
-import Card from "./Card";
+} from "../../pages/demo";
+import Card from "../Cards/Card";
 
 type Player1CardPropsType = {
   data: CardDataType;
@@ -54,7 +59,7 @@ export default function Player1Card({ data }: Player1CardPropsType) {
     } else if (phase == PhaseType.PLANT) {
       if (data.card.type == CropType) {
         // PLANT TO CROP AREA
-        if (getCardDataCount(harvestArea) <= 4) {
+        if (getCardDataCount(harvestArea) < 4) {
           // remove from player hand
           setPlayer1Hand((prevPlayer1Hand: CardDataType[]) => {
             const newPlayer1Hand = removeCardFromData(

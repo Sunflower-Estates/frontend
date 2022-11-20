@@ -1,5 +1,5 @@
-import { CardDataType, PlayerType } from "../pages/demo";
-import Player2Card from "./Player2Card";
+import { CardDataType, PlayerType } from "../../pages/demo";
+import Player2Card from "../CardWrappers/Player2Card";
 
 export type Player2HandPropsType = {
   player2: PlayerType;

@@ -1,16 +1,16 @@
 import { MouseEvent, MouseEventHandler, useContext } from "react";
 
-import { MainStoreContext } from "../context/MainStoreContext";
-import { PhaseContext } from "../context/PhaseContext";
+import { MainStoreContext } from "../../context/MainStoreContext";
+import { PhaseContext } from "../../context/PhaseContext";
 import {
   addCardToData,
   CardDataType,
   PhaseType,
   PlayerType,
   removeCardFromData,
-} from "../pages/demo";
-import Card from "./Card";
-import CardHalf from "./CardHalf";
+} from "../../pages/demo";
+import Card from "../Cards/Card";
+import CardHalf from "../Cards/CardHalf";
 type StoreCardPropsType = {
   data: CardDataType;
 };

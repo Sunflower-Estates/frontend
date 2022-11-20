@@ -1,16 +1,15 @@
 import { MouseEvent, MouseEventHandler, useContext } from "react";
 
-import { MainStoreContext } from "../context/MainStoreContext";
-import { PhaseContext } from "../context/PhaseContext";
+import { MainStoreContext } from "../../context/MainStoreContext";
+import { PhaseContext } from "../../context/PhaseContext";
 import {
   addCardToData,
   CardDataType,
   PhaseType,
   PlayerType,
   removeCardFromData,
-} from "../pages/demo";
-import Card from "./Card";
-import CardHalf from "./CardHalf";
+} from "../../pages/demo";
+import CardHalf from "../Cards/CardHalf";
 export type SideStoreCardPropsType = {
   data: CardDataType;
 };

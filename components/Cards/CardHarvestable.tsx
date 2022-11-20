@@ -2,10 +2,9 @@ import Image from "next/image";
 import React, { useContext, useMemo } from "react";
 import { MouseEventHandler } from "react";
 
-import { ModalContext } from "../context/ModalContext";
-import { PhaseContext } from "../context/PhaseContext";
-import { CardDataType, PhaseType } from "../pages/demo";
-import CardModal from "./CardModal";
+import { ModalContext } from "../../context/ModalContext";
+import { PhaseContext } from "../../context/PhaseContext";
+import { CardDataType, PhaseType } from "../../pages/demo";
 
 type CardHarvestableProps = {
   data: CardDataType;

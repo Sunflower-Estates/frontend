@@ -3,18 +3,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import _ from "lodash";
-import {
-  createContext,
-  createElement,
-  Dispatch,
-  MouseEvent,
-  MouseEventHandler,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -53,21 +42,15 @@ import {
   Tribute,
   Wheat,
   WishingWell,
-} from "../cards/Cards";
-import { ActionType, CardTypeType, CropType } from "../cards/CardTypes";
-import ActionStoreCard from "../components/ActionStoreCard";
-import Card from "../components/Card";
+} from "../card-data/Cards";
+import { ActionType, CardTypeType, CropType } from "../card-data/CardTypes";
+import { HarvestArea } from "../components/Areas/HarvestArea";
+import { PlayArea } from "../components/Areas/PlayArea";
+import { Player1Area } from "../components/Areas/Player1Area";
 import CardModal from "../components/CardModal";
-import { CropStore } from "../components/CropStore";
-import { HarvestArea } from "../components/HarvestArea";
-import { MainStore } from "../components/MainStore";
 import Navbar from "../components/Navbar";
-import { PlayArea } from "../components/PlayArea";
-import { Player1Area } from "../components/Player1Area";
-import Player1Card from "../components/Player1Card";
-import Player2Card from "../components/Player2Card";
-import { Player2Hand } from "../components/Player2Hand";
-import WarbondStoreCard from "../components/WarbondStoreCard";
+import { CropStore } from "../components/Stores/CropStore";
+import { MainStore } from "../components/Stores/MainStore";
 import { CropStoreContext } from "../context/CropStoreContext";
 import { HarvestAreaContext } from "../context/HarvestAreaContext";
 import { MainStoreContext } from "../context/MainStoreContext";

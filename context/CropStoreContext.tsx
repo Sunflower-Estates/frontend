@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { Sunflower } from "../cards/Cards";
+import { Sunflower } from "../card-data/Cards";
 import { CardDataType, PlayerType } from "../pages/demo";
 
 interface CropStoreContextInterface {
