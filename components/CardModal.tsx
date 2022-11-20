@@ -50,8 +50,6 @@ export default function CardModal({ card }: CardModalPropsType): JSX.Element {
               width={350}
               height={700}
               className="card"
-              data-tilt
-              data-tilt-full-page-listening
             ></img>
           </div>
         </div>
