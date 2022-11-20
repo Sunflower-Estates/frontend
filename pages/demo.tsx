@@ -66,6 +66,7 @@ import {
   getCardDataCountOfType,
   addDataToData,
 } from "../helpers/CardDataHelper";
+import { PermanentArea } from "../components/Areas/PermanentArea";
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
@@ -333,31 +334,33 @@ export default function Demo(): JSX.Element {
                   >
                     <MainStore />
                   </MainStoreContext.Provider>
-                  <h2>
-                    Phase: <span className="font-bold">{PhaseType[phase]}</span>
-                  </h2>
                   <div className="flex">
-                    <HarvestAreaContext.Provider
-                      value={{
-                        harvestArea: harvestArea,
-                        setHarvestArea: setHarvestArea,
-                        playArea: playArea,
-                        setPlayArea: setPlayArea,
-                        player1: player1,
-                        setPlayer1: setPlayer1,
-                      }}
-                    >
-                      <HarvestArea></HarvestArea>
-                    </HarvestAreaContext.Provider>
-                    <PlayAreaContext.Provider
-                      value={{
-                        playArea: playArea,
-                        setPlayArea: setPlayArea,
-                        setHarvestArea: setHarvestArea,
-                      }}
-                    >
-                      <PlayArea />
-                    </PlayAreaContext.Provider>
+                    <div className="flex flex-col">
+                      <PermanentArea></PermanentArea>
+                    </div>
+                    <div className="flex flex-col">
+                      <HarvestAreaContext.Provider
+                        value={{
+                          harvestArea: harvestArea,
+                          setHarvestArea: setHarvestArea,
+                          playArea: playArea,
+                          setPlayArea: setPlayArea,
+                          player1: player1,
+                          setPlayer1: setPlayer1,
+                        }}
+                      >
+                        <HarvestArea></HarvestArea>
+                      </HarvestAreaContext.Provider>
+                      <PlayAreaContext.Provider
+                        value={{
+                          playArea: playArea,
+                          setPlayArea: setPlayArea,
+                          setHarvestArea: setHarvestArea,
+                        }}
+                      >
+                        <PlayArea />
+                      </PlayAreaContext.Provider>
+                    </div>
                   </div>
                   <Player1AreaContext.Provider
                     value={{
@@ -377,6 +380,9 @@ export default function Demo(): JSX.Element {
                 </div>
               </main>
             </ModalContext.Provider>
+            <div className="flex w-full justify-center">
+              Phase: <span className="font-bold">{PhaseType[phase]}</span>
+            </div>
             <div className="w-full flex justify-center">
               <button className="btn" onClick={() => setPhase(0)}>
                 {PhaseType[0]}
