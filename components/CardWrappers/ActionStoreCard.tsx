@@ -3,12 +3,10 @@ import { MouseEvent, MouseEventHandler, useContext } from "react";
 import { MainStoreContext } from "../../context/MainStoreContext";
 import { PhaseContext } from "../../context/PhaseContext";
 import {
-  addCardToData,
-  CardDataType,
-  PhaseType,
-  PlayerType,
   removeCardFromData,
-} from "../../pages/demo";
+  addCardToData,
+} from "../../helpers/CardDataHelper";
+import { CardDataType, PhaseType, PlayerType } from "../../pages/demo";
 import CardHalf from "../Cards/CardHalf";
 type StoreCardPropsType = {
   data: CardDataType;

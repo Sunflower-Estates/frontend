@@ -10,12 +10,10 @@ import { PhaseContext } from "../../context/PhaseContext";
 import { Player1AreaContext } from "../../context/Player1AreaContext";
 import {
   addCardToData,
-  CardDataType,
   getCardDataCount,
-  PhaseType,
-  PlayerType,
   removeCardFromData,
-} from "../../pages/demo";
+} from "../../helpers/CardDataHelper";
+import { CardDataType, PhaseType, PlayerType } from "../../pages/demo";
 import Card from "../Cards/Card";
 
 type Player1CardPropsType = {

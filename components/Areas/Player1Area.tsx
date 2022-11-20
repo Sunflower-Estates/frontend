@@ -1,7 +1,8 @@
 import { useContext } from "react";
 
 import { Player1AreaContext } from "../../context/Player1AreaContext";
-import { CardDataType, getCardDataCount, PlayerType } from "../../pages/demo";
+import { getCardDataCount } from "../../helpers/CardDataHelper";
+import { CardDataType, PlayerType } from "../../pages/demo";
 import Player1Card from "../CardWrappers/Player1Card";
 import { Player1Hand } from "./Player1Hand";
 

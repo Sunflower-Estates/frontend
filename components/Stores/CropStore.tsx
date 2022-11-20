@@ -4,10 +4,9 @@ import { CardType } from "../../card-data/Cards";
 import { CropStoreContext } from "../../context/CropStoreContext";
 import {
   addCardToData,
-  CardDataType,
-  PlayerType,
   removeCardFromData,
-} from "../../pages/demo";
+} from "../../helpers/CardDataHelper";
+import { CardDataType, PlayerType } from "../../pages/demo";
 import Card from "../Cards/Card";
 import CardIcon from "../Cards/CardIcon";
 
