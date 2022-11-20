@@ -7,7 +7,6 @@ import {
   PlayerType,
   removeCardFromData,
 } from "../../pages/demo";
-import Card from "../Cards/Card";
 import CardHarvestable from "../Cards/CardHarvestable";
 
 type HarvestCardPropsType = {

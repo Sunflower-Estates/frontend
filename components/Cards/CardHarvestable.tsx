@@ -39,7 +39,7 @@ export default function CardHarvestable({
       style={{ minWidth: 125, minHeight: 175 }}
     >
       <div
-        className="absolute bottom-0  bg-red-500 rounded-full text-center"
+        className="absolute bottom-0 z-0 right-0 bg-red-500 rounded-full text-center"
         style={{ width: 25, height: 25 }}
       >
         {data.count == Infinity ? "∞" : data.count}

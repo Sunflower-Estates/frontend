@@ -2,11 +2,7 @@ import { useContext } from "react";
 
 import { CropType } from "../../card-data/CardTypes";
 import { PlayAreaContext } from "../../context/PlayAreaContext";
-import {
-  addCardToData,
-  CardDataType,
-  removeCardFromData,
-} from "../../pages/demo";
+import { CardDataType } from "../../pages/demo";
 import Card from "../Cards/Card";
 
 type PlayAreaCardPropsType = {

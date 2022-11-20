@@ -9,7 +9,6 @@ import {
   PlayerType,
   removeCardFromData,
 } from "../../pages/demo";
-import Card from "../Cards/Card";
 import CardHalf from "../Cards/CardHalf";
 type StoreCardPropsType = {
   data: CardDataType;

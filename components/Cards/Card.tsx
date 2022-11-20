@@ -1,10 +1,10 @@
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { createRef, useContext, useEffect, useRef } from "react";
 import { MouseEventHandler } from "react";
+import VanillaTilt from "vanilla-tilt";
 
 import { ModalContext } from "../../context/ModalContext";
 import { CardDataType } from "../../pages/demo";
-import CardModal from "../CardModal";
 
 type CardProps = {
   data: CardDataType;
@@ -38,7 +38,7 @@ export default function Card({
       >
         {data.count == Infinity ? "∞" : data.count}
       </div>
-      <Image
+      <img
         src={`${data.card.cardImage}`}
         alt=""
         width={125}

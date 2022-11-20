@@ -11,9 +11,7 @@ export function Player1Area() {
   const { player1Deck } = player1AreaContext;
   return (
     <div className="flex" style={{ minHeight: "230px" }}>
-      <div className="bg-white border" style={{ width: 125 }}>
-        <img src="" alt="" />
-      </div>
+      <div className="bg-white border" style={{ width: 125 }}></div>
       <div className="bg-white border" style={{ width: 125 }}></div>
       <div className=" bg-white border">
         <Player1Hand />

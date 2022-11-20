@@ -17,9 +17,9 @@ export default function WarbondStoreCard({ data }: SideStoreCardPropsType) {
   const warbondStoreContext = useContext(MainStoreContext);
   const phaseContext = useContext(PhaseContext);
   if (!warbondStoreContext || !phaseContext) return null;
-  const { player1, setPlayer1, setWarbondStore, setPlayArea, setPlayer1Deck } =
+  const { player1, setPlayer1, setWarbondStore, setPlayer1Deck } =
     warbondStoreContext;
-  const { phase, setPhase } = phaseContext;
+  const { phase } = phaseContext;
 
   const handleClick: MouseEventHandler = (e: MouseEvent<HTMLElement>) => {
     if (phase == PhaseType.BUY) {

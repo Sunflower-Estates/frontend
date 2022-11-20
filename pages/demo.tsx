@@ -58,6 +58,7 @@ import { ModalContext } from "../context/ModalContext";
 import { PhaseContext } from "../context/PhaseContext";
 import { PlayAreaContext } from "../context/PlayAreaContext";
 import { Player1AreaContext } from "../context/Player1AreaContext";
+import VanillaTilt from "vanilla-tilt";
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
