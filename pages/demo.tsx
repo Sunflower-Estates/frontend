@@ -236,33 +236,43 @@ export default function Demo(): JSX.Element {
         player1Draw(5);
         setHasDrawn(true);
       }
+      setPhase(PhaseType.HARVEST);
     }
     //  HARVEST
     else if (phase == PhaseType.HARVEST) {
       if (getCardDataCount(harvestArea) > 0) {
         //
+      } else {
+        setPhase(PhaseType.ACTION);
       }
     }
     // ACTION
     else if (phase == PhaseType.ACTION) {
       if (getCardDataCountOfType(player1Hand, ActionType) > 0) {
         //
+      } else {
+        setPhase(PhaseType.PLANT);
       }
     }
     // PLANT
     else if (phase == PhaseType.PLANT) {
       if (getCardDataCountOfType(player1Hand, CropType) > 0) {
         //
+      } else {
+        setPhase(PhaseType.BUY);
       }
     }
     // BUY
     else if (phase == PhaseType.BUY) {
       if (player1.gold > 0) {
         //
+      } else {
+        setPhase(PhaseType.PRECLEANUP);
       }
     }
     // PRECLEANUP
     else if (phase == PhaseType.PRECLEANUP) {
+      setPhase(PhaseType.CLEANUP);
     }
     // CLEANUP
     else if (phase == PhaseType.CLEANUP) {
@@ -277,6 +287,7 @@ export default function Demo(): JSX.Element {
         setPlayArea([]);
       }
       setHasDrawn(false);
+      setPhase(PhaseType.PREHARVEST);
     }
   }, [
     harvestArea,
