@@ -9,7 +9,7 @@ export function PlayArea() {
   const { playArea } = playAreaContext;
 
   return (
-    <div className="bg-white" style={{ width: 750, height: 175 }}>
+    <div id="playArea" className="bg-white" style={{ width: 750, height: 175 }}>
       {playArea.map((cardData) => {
         return (
           <PlayAreaCard

@@ -9,7 +9,7 @@ export function Player1Area() {
   if (!player1AreaContext) return null;
   const { player1Deck } = player1AreaContext;
   return (
-    <div className="flex" style={{ minHeight: "230px" }}>
+    <div id="player1Area" className="flex" style={{ minHeight: "230px" }}>
       <div
         className=" border"
         style={{

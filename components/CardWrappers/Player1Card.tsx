@@ -1,8 +1,11 @@
+import { animate, motion } from "framer-motion";
 import {
   createElement,
   MouseEvent,
   MouseEventHandler,
   useContext,
+  useRef,
+  useState,
 } from "react";
 
 import { ActionType, CropType } from "../../card-data/CardTypes";
@@ -32,6 +35,21 @@ export default function Player1Card({ data }: Player1CardPropsType) {
     setHarvestArea,
   } = player1AreaContext;
   const { phase, setPhase } = phaseContext;
+
+  const motionRef = useRef(null);
+
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
+  const handleTap: any = (e: any) => {
+    const cardCoords = e.target.getBoundingClientRect();
+    const playAreaCoords = document
+      .getElementById("playArea")
+      ?.getBoundingClientRect()!;
+    setCoords({
+      x: (cardCoords["x"] - playAreaCoords["x"]) * -1,
+      y: (cardCoords["y"] - playAreaCoords["y"]) * -1,
+    });
+  };
 
   const handleClick: MouseEventHandler = (e: MouseEvent<HTMLElement>) => {
     if (phase == PhaseType.ACTION) {
@@ -76,10 +94,22 @@ export default function Player1Card({ data }: Player1CardPropsType) {
     }
   };
   return (
-    <Card
-      data={data}
-      handleClick={handleClick}
-      highlighted={phase == PhaseType.PLANT && data.card.type == CropType}
-    />
+    <>
+      <motion.div
+        className="absolute bg-red-600"
+        style={{ width: 100, height: 100 }}
+        onTap={handleTap}
+        animate={coords}
+        ref={motionRef}
+        onAnimationComplete={() => {
+          // motionRef.current.classList.add("hidden");
+        }}
+      ></motion.div>
+      <Card
+        data={data}
+        handleClick={handleClick}
+        highlighted={phase == PhaseType.PLANT && data.card.type == CropType}
+      />
+    </>
   );
 }
