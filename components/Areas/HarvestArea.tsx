@@ -9,7 +9,7 @@ export function HarvestArea() {
   const { harvestArea } = harvestAreaContext;
   return (
     <div
-      id="harvest-area"
+      id="harvestArea"
       className="bg-white border flex"
       style={{ width: 500, height: 175 }}
     >

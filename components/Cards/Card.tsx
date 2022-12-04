@@ -32,12 +32,6 @@ export default function Card({
       className="cursor-pointer relative"
       style={{ width: 125, height: 175 }}
     >
-      <div
-        className="absolute top-0 right-0 bg-red-500 rounded-full text-center ml-auto "
-        style={{ width: "25px", height: "25px" }}
-      >
-        {data.count == Infinity ? "∞" : data.count}
-      </div>
       <img
         src={`${data.card.cardImage}`}
         alt=""

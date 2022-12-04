@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { motion, MotionConfig } from "framer-motion";
+import { useContext, useState } from "react";
 
 import { HarvestAreaContext } from "../../context/HarvestAreaContext";
+import { moveTo } from "../../helpers/AnimationHelper";
 import {
   removeCardFromData,
   addCardToData,
@@ -16,6 +18,8 @@ export function HarvestCard({ data, isHarvestable }: HarvestCardPropsType) {
   const harvestAreaContext = useContext(HarvestAreaContext);
   if (!harvestAreaContext) return null;
   const { setHarvestArea, setPlayArea, setPlayer1 } = harvestAreaContext;
+
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
 
   function handleClick(e: any) {
     e.preventDefault();
@@ -37,13 +41,16 @@ export function HarvestCard({ data, isHarvestable }: HarvestCardPropsType) {
       };
       return newPlayer1;
     });
+    moveTo(e, "playArea", setCoords);
   }
 
   return (
-    <CardHarvestable
-      handleClick={handleClick}
-      data={data}
-      isHarvestable={false}
-    />
+    <motion.div animate={coords}>
+      <CardHarvestable
+        handleClick={handleClick}
+        data={data}
+        isHarvestable={false}
+      />
+    </motion.div>
   );
 }

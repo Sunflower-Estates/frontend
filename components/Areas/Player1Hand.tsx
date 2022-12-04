@@ -11,9 +11,11 @@ export function Player1Hand() {
   return (
     <div className="flex" style={{ width: 1000 }}>
       {(player1Hand ?? [])?.map((data: CardDataType) => {
-        return (
-          <Player1Card key={"player1Hand-" + data.card.name} data={data} />
-        );
+        return [...Array(data.count)].map(() => {
+          return (
+            <Player1Card key={"player1Hand-" + data.card.name} data={data} />
+          );
+        });
       })}
     </div>
   );
