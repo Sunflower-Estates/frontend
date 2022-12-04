@@ -17,6 +17,7 @@ import {
   removeCardFromData,
 } from "../../helpers/CardDataHelper";
 import { CardDataType, PhaseType, PlayerType } from "../../pages/demo";
+import { PlayArea } from "../Areas/PlayArea";
 import Card from "../Cards/Card";
 
 type Player1CardPropsType = {
@@ -36,20 +37,9 @@ export default function Player1Card({ data }: Player1CardPropsType) {
   } = player1AreaContext;
   const { phase, setPhase } = phaseContext;
 
-  const motionRef = useRef(null);
-
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  const handleTap: any = (e: any) => {
-    const cardCoords = e.target.getBoundingClientRect();
-    const playAreaCoords = document
-      .getElementById("playArea")
-      ?.getBoundingClientRect()!;
-    setCoords({
-      x: (cardCoords["x"] - playAreaCoords["x"]) * -1,
-      y: (cardCoords["y"] - playAreaCoords["y"]) * -1,
-    });
-  };
+  const motionRef = useRef(null);
 
   const handleClick: MouseEventHandler = (e: MouseEvent<HTMLElement>) => {
     if (phase == PhaseType.ACTION) {
@@ -71,6 +61,7 @@ export default function Player1Card({ data }: Player1CardPropsType) {
           };
           return newPlayer1;
         });
+        moveTo(e, "playArea");
       }
     } else if (phase == PhaseType.PLANT) {
       if (data.card.type == CropType) {
@@ -89,6 +80,7 @@ export default function Player1Card({ data }: Player1CardPropsType) {
             const newHarvestArea = addCardToData(data.card, prevHarvestArea);
             return newHarvestArea;
           });
+          moveTo(e, "harvestArea");
         }
       }
     }
@@ -96,20 +88,17 @@ export default function Player1Card({ data }: Player1CardPropsType) {
   return (
     <>
       <motion.div
-        className="absolute bg-red-600"
-        style={{ width: 100, height: 100 }}
-        onTap={handleTap}
-        animate={coords}
         ref={motionRef}
-        onAnimationComplete={() => {
-          // motionRef.current.classList.add("hidden");
-        }}
-      ></motion.div>
-      <Card
-        data={data}
-        handleClick={handleClick}
-        highlighted={phase == PhaseType.PLANT && data.card.type == CropType}
-      />
+        className="bg-red-600"
+        style={{ width: 100, height: 100 }}
+        animate={coords}
+      >
+        <Card
+          data={data}
+          handleClick={handleClick}
+          highlighted={phase == PhaseType.PLANT && data.card.type == CropType}
+        />
+      </motion.div>
     </>
   );
 }
